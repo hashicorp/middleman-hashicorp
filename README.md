@@ -7,7 +7,7 @@ Installation
 Add this line to the Gemfile:
 
 ```ruby
-gem 'middleman-hashicorp'
+gem 'middleman-hashicorp', github: 'hashicorp/middleman-hashicorp'
 ```
 
 And then run:
