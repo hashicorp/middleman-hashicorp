@@ -116,8 +116,6 @@ Contributing
 5. Create a new Pull Request
 
 
-- - -
-
 [Middleman]: http://middlemanapp.com/
 [Middleman docs]: http://middlemanapp.com/basics/getting-started/
 [middleman-syntax]: http://github.com/middleman/middleman-syntax/
