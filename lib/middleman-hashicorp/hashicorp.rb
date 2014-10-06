@@ -204,7 +204,13 @@ module Middleman
         activate :minify_javascript
 
         # Minify HTML
-        activate :minify_html
+        require 'middleman-minify-html'
+        activate :minify_html do |html|
+          html.remove_quotes = false
+          html.remove_script_attributes = false
+          html.remove_http_protocol = false
+          html.remove_https_protocol = false
+        end
 
         # Enable cache buster
         activate :asset_hash
