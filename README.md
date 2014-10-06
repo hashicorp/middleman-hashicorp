@@ -43,7 +43,7 @@ end
 
 As you see, this is just Ruby, so any credentials (such as API keys and passwords) should be read from the `ENV` hash. You can read more about the Bintray integration below.
 
-Almost all of the options may be removed from the `config.rb`. See a HashiCorp project for examples.
+Almost all other Middleman options may be removed from the `config.rb`. See a HashiCorp project for examples.
 
 
 Customizations
