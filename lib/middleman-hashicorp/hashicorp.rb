@@ -53,18 +53,22 @@ module Middleman
     }.freeze
 
     attr_reader :filter
+    attr_reader :prefixed
 
     #
     # @param [String] :repo (e.g. mitchellh/packer)
     # @param [String] :user (e.g. mitchellh/packer)
     # @param [String] :key (e.g. abcd1234)
     # @param [Proc] :filter
+    # @param [Boolean] :prefixed
     #
-    def initialize(repo:, user:, key:, filter: nil)
+    def initialize(repo:, user:, key:, filter: nil, prefixed: true)
       set_or_raise(:repo, repo)
       set_or_raise(:user, user)
       set_or_raise(:key, key)
+
       @filter = filter || Proc.new {}
+      @prefixed = prefixed
     end
 
     #
@@ -85,7 +89,13 @@ module Middleman
     def downloads_for_version(version)
       url = "http://dl.bintray.com/#{repo}/"
       options = { http_basic_authentication: [user, key] }
-      regex = /#{Regexp.escape(repo)}\/(#{Regexp.escape(version)}_.+?)'/
+
+      if prefixed
+        project = repo.split('/', 2).last
+        regex = /#{Regexp.escape(repo)}\/(#{Regexp.escape(project)}_#{Regexp.escape(version)}_.+?)'/
+      else
+        regex = /#{Regexp.escape(repo)}\/(#{Regexp.escape(version)}_.+?)'/
+      end
 
       result = Hash.new { |h,k| h[k] = [] }
 
@@ -93,10 +103,11 @@ module Middleman
         file.readlines.each do |line|
           if line.chomp! =~ regex
             filename = $1
-            os = $1.strip.split('_')[1].strip
 
             # Hardcoded filter
-            next if os == 'SHA256SUMS'
+            next if filename.include?('SHA256SUMS')
+
+            os = filename.strip.split('_')[-2].strip
 
             # Custom filter
             next if filter.call(os, filename)
@@ -142,6 +153,7 @@ module Middleman
     option :bintray_user, nil, 'The Bintray http basic auth user (e.g. mitchellh)'
     option :bintray_key, nil, 'The Bintray http basic auth key (e.g. abcd1234)'
     option :bintray_exclude_proc, nil, 'A filter to apply for packages'
+    option :bintray_prefixed, true, 'Whether packages are prefixed with the project name'
     option :version, nil, 'The version of the package (e.g. 0.1.0)'
 
     def initialize(app, options_hash = {}, &block)
@@ -237,7 +249,7 @@ module Middleman
       # @return [String]
       #
       def arch_for_filename(path)
-        file = File.basename(path)
+        file = File.basename(path, File.extname(path))
 
         case file
         when /686/, /386/
@@ -245,7 +257,13 @@ module Middleman
         when /86_64/, /amd64/
           '64-bit'
         else
-          'Universal (32 and 64-bit)'
+          parts = file.split('_')
+
+          if parts.empty?
+            raise "Could not determine arch for filename `#{file}'!"
+          end
+
+          parts.last.capitalize
         end
       end
     end
@@ -271,10 +289,11 @@ module Middleman
     #
     def real_product_versions
       BintrayAPI.new(
-        repo:   options.bintray_repo,
-        user:   options.bintray_user,
-        key:    options.bintray_key,
-        filter: options.bintray_exclude_proc,
+        repo:     options.bintray_repo,
+        user:     options.bintray_user,
+        key:      options.bintray_key,
+        filter:   options.bintray_exclude_proc,
+        prefixed: options.bintray_prefixed,
       ).downloads_for_version(options.version)
     end
   end

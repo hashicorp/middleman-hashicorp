@@ -38,6 +38,10 @@ activate :hashicorp do |h|
   h.bintray_exclude_proc = Proc.new do |os, filename|
     os == 'windows' # Exclude windows packages
   end
+
+  # Packages are not product-prefixed
+  # TODO: Remove this in the future...
+  h.bintray_prefixed = false
 end
 ```
 
