@@ -220,6 +220,7 @@ module Middleman
         activate :minify_html do |html|
           html.remove_quotes = false
           html.remove_script_attributes = false
+          html.remove_multi_spaces = false
           html.remove_http_protocol = false
           html.remove_https_protocol = false
         end
