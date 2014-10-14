@@ -62,7 +62,7 @@ module Middleman
     # @param [Proc] :filter
     # @param [Boolean] :prefixed
     #
-    def initialize(repo:, user:, key:, filter: nil, prefixed: true)
+    def initialize(repo: nil, user: nil, key: nil, filter: nil, prefixed: true)
       set_or_raise(:repo, repo)
       set_or_raise(:user, user)
       set_or_raise(:key, key)

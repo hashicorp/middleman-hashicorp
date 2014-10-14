@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '~> 2.0.0'
+
   # Middleman
   spec.add_dependency 'middleman',             '~> 3.3'
   spec.add_dependency 'middleman-minify-html', '~> 3.4'
