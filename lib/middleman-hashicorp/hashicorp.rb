@@ -121,7 +121,7 @@ module Middleman
       end
 
       result.values.each(&:sort!)
-      result.sort.to_h
+      Hash[*result.sort.flatten(1)]
     end
 
     private
