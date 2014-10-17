@@ -13,8 +13,8 @@ module Middleman
       # @param [String] list_type
       #
       def list_item(text, list_type)
-        if match = text.match(/(<code>(.+?)<\/code>)/)
-          container, name = match.captures
+        if md = text.match(/(<code>(.+?)<\/code>)/)
+          container, name = md.captures
           anchor = anchor_for(name)
 
           replace = %|<a name="#{anchor}" /><a href="##{anchor}">#{container}</a>|
@@ -30,8 +30,8 @@ module Middleman
       # @param [String] raw
       #
       def block_html(raw)
-        if markdown = raw.match(/\<(.+?)\>(.*)\<(\/.+?)\>/m)
-          open_tag, content, close_tag = markdown.captures
+        if md = raw.match(/\<(.+?)\>(.*)\<(\/.+?)\>/m)
+          open_tag, content, close_tag = md.captures
           "<#{open_tag}>\n#{recursive_render(content)}<#{close_tag}>"
         else
           raw
