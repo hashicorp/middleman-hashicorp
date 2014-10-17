@@ -1,5 +1,4 @@
 require 'rspec'
-require 'nokogiri'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
@@ -14,11 +13,10 @@ RSpec::Matchers.define :render_html do |html|
   diffable
 
   match do |markdown|
-    parser = Redcarpet::Markdown.new(described_class)
-    rendered = parser.render(markdown)
+    @expected = html.strip
 
-    @actual = Nokogiri::XML(rendered, &:noblanks).to_xhtml(indent: 2)
-    @expected = Nokogiri::XML(expected, &:noblanks).to_xhtml(indent: 2)
+    parser = Redcarpet::Markdown.new(described_class)
+    @actual = parser.render(markdown).strip
 
     @expected == @actual
   end
