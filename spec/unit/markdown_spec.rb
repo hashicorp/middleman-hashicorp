@@ -108,27 +108,5 @@ module Middleman::HashiCorp
 
       expect(markdown).to render_html(output)
     end
-
-    # it "supports definition lists" do
-    #   markdown = <<-EOH.gsub(/^ {8}/, '')
-    #     Some Method
-    #     : This is the description
-
-    #     Another Method
-    #     : This is more description
-    #   EOH
-    #   output = <<-EOH.gsub(/^ {8}/, '')
-    #     <dl>
-    #       <dt>Some Method<dt>
-    #       <dd>This is the description</dd>
-    #     </dl>
-    #     <dl>
-    #       <dt>Another Method<dt>
-    #       <dd>This is more description</dd>
-    #     </dl>
-    #   EOH
-
-    #   expect(markdown).to render_html(output)
-    # end
   end
 end
