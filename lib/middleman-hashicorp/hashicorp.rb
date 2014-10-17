@@ -214,6 +214,7 @@ module Middleman
         tables: true,
         no_intra_emphasis: true,
         with_toc_data: true,
+        xhtml: true,
         strikethrough: true,
         superscript: true,
         renderer: Middleman::HashiCorp::RedcarpetHTML
