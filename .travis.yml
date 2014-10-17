@@ -1,0 +1,8 @@
+rvm:
+  - 2.0.0
+
+branches:
+  only:
+    - master
+
+bundler_args: --jobs 7

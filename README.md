@@ -90,13 +90,70 @@ Customizations
 ### Markdown
 This extension extends the redcarpet markdown processor to add some additional features:
 
-- Auto-linking of code anchor tags
 - Autolinking of URLs
 - Fenced code blocks
 - Tables
 - TOC data
 - Strikethrough
 - Superscript
+
+In addition to "standard markdown", the custom markdown parser supports the following:
+
+#### Auto-linking Anchor Tags
+Sine the majority of HashiCorp's projects use the following syntax to define APIs, this extension automatically converts those to named anchor links:
+
+```markdown
+- `api_method` - description
+```
+
+Outputs:
+
+```html
+<ul>
+  <li><a name="api_method" /><a href="#api_method"></a> - description</li>
+</ul>
+```
+
+Any special characters are converted to an underscore (`_`).
+
+#### Recursive Markdown Rendering
+By default, the Markdown spec does not call for rendering markdown recursively inside of HTML. With this extension, it is valid:
+
+```markdown
+<div class="center">
+  This will **be bold**!
+</div>
+```
+
+#### Bootstrap Alerts
+There are 4 custom markdown extensions that automatically create Twitter Bootstrap-style alerts:
+
+- `=>` => `success`
+- `->` => `info`
+- `~>` => `warning`
+- `!>` => `danger`
+
+```markdown
+-> Hey, you should know...
+```
+
+```html
+<div class="alert alert-info" role="alert">
+  <p>Hey, you should know...</p>
+</div>
+```
+
+Of course you can use Markdown inside the block:
+
+```markdown
+!> This is a **really** advanced topic!
+```
+
+```html
+<div class="alert alert-danger" role="alert">
+  <p>This is a <strong>really</strong> advanced topic!</p>
+</div>
+```
 
 ### Bootstrap
 Twitter Bootstrap (3.x) is automatically bundled. Simply activate it it in your CSS and Javascript:
