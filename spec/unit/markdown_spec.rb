@@ -35,5 +35,23 @@ module Middleman::HashiCorp
 
       expect(markdown).to render_html(output)
     end
+
+    it "supports markdown inside HTML" do
+      markdown = <<-EOH.gsub(/^ {8}/, '')
+        This is some markdown
+
+        <div class="center">
+          **Here** is some _html_ though! ;)
+        </div>
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, '')
+        <p>This is some markdown</p>
+        <div class="center">
+          <strong>Here</strong> is some <em>html</em> though! ;)
+        </div>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
   end
 end
