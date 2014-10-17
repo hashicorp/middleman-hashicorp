@@ -1,3 +1,4 @@
+require 'middleman-core'
 require 'middleman-core/renderers/redcarpet'
 
 module Middleman
@@ -6,15 +7,11 @@ module Middleman
     # pick up all the magic.
     class RedcarpetHTML < ::Middleman::Renderers::MiddlemanRedcarpetHTML
       def list_item(text, list_type)
-        if text.include?('<code>')
-          if text =~ /(<code>(.+)<\/code>)/
-            container, name = $1, $2
-            anchor = anchor_for(name)
-          else
-            return text
-          end
+        if text =~ /^(<code>(.+?)<\/code>)/
+          container, name = $1, $2
+          anchor = anchor_for(name)
 
-          replace = %|<a name="#{anchor}"></a><a href="##{anchor}">#{container}</a>|
+          replace = %|<a name="#{anchor}" /><a href="##{anchor}">#{container}</a>|
           text.sub!(container, replace)
         end
 
@@ -36,7 +33,7 @@ module Middleman
       # @return [String]
       #
       def anchor_for(text)
-        text.gsub(/[^[:word:]]/, '_')
+        text.gsub(/[^[:word:]]/, '_').squeeze('_')
       end
     end
   end
