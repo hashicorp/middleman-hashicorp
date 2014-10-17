@@ -13,7 +13,7 @@ module Middleman
       # @param [String] list_type
       #
       def list_item(text, list_type)
-        if match = text.match(/^(<code>(.+?)<\/code>)/)
+        if match = text.match(/(<code>(.+?)<\/code>)/)
           container, name = match.captures
           anchor = anchor_for(name)
 
@@ -21,7 +21,7 @@ module Middleman
           text.sub!(container, replace)
         end
 
-        "<li>#{text}</li>"
+        "<li>#{text}</li>\n"
       end
 
       #
