@@ -60,7 +60,7 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
-    it 'supports markdown inside HTML', :focus do
+    it 'supports markdown inside HTML' do
       markdown = <<-EOH.gsub(/^ {8}/, '')
         This is some markdown
 
