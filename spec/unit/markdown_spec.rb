@@ -78,6 +78,37 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
+    it 'supports alert boxes' do
+      markdown = <<-EOH.gsub(/^ {8}/, '')
+        => This is a success note
+
+        -> This is an info note
+
+        ~> This is a _warning_ note
+
+        !> This is a danger note
+
+        And this is a regular paragraph!
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, '')
+        <div class="alert alert-success" role="alert">
+        <p>This is a success note</p>
+        </div>
+        <div class="alert alert-info" role="alert">
+        <p>This is an info note</p>
+        </div>
+        <div class="alert alert-warning" role="alert">
+        <p>This is a <em>warning</em> note</p>
+        </div>
+        <div class="alert alert-danger" role="alert">
+        <p>This is a danger note</p>
+        </div>
+        <p>And this is a regular paragraph!</p>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
+
     # it "supports definition lists" do
     #   markdown = <<-EOH.gsub(/^ {8}/, '')
     #     Some Method

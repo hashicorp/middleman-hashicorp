@@ -38,6 +38,16 @@ module Middleman
         end
       end
 
+      #
+      # Override paragraph to support custom alerts.
+      #
+      # @param [String] text
+      # @return [String]
+      #
+      def paragraph(text)
+        add_alerts("<p>#{text.strip}</p>\n")
+      end
+
       private
 
       #
@@ -66,6 +76,36 @@ module Middleman
       #
       def recursive_render(markdown)
         Redcarpet::Markdown.new(self.class).render(markdown)
+      end
+
+      #
+      # Add alert text to the given markdown.
+      #
+      # @param [String] text
+      # @return [String]
+      #
+      def add_alerts(text)
+        map = {
+          '=&gt;' => 'success',
+          '-&gt;' => 'info',
+          '~&gt;' => 'warning',
+          '!&gt;' => 'danger',
+        }
+
+        regexp = map.map { |k, _| Regexp.escape(k) }.join('|')
+
+        if md = text.match(/^<p>(#{regexp})/)
+          key = md.captures[0]
+          klass = map[key]
+          text.gsub!(/#{Regexp.escape(key)}\s+?/, '')
+
+          return <<-EOH.gsub(/^ {12}/, '')
+            <div class="alert alert-#{klass}" role="alert">
+            #{text}</div>
+          EOH
+        else
+          return text
+        end
       end
     end
   end
