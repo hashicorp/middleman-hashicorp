@@ -6,9 +6,15 @@ module Middleman
     # Our custom Markdown parser - extends middleman's customer parser so we
     # pick up all the magic.
     class RedcarpetHTML < ::Middleman::Renderers::MiddlemanRedcarpetHTML
+      #
+      # Override list_item to automatically add links for documentation
+      #
+      # @param [String] text
+      # @param [String] list_type
+      #
       def list_item(text, list_type)
-        if text =~ /^(<code>(.+?)<\/code>)/
-          container, name = $1, $2
+        if match = text.match(/^(<code>(.+?)<\/code>)/)
+          container, name = match.captures
           anchor = anchor_for(name)
 
           replace = %|<a name="#{anchor}" /><a href="##{anchor}">#{container}</a>|
