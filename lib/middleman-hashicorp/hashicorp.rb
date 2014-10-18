@@ -1,6 +1,17 @@
 require 'middleman-core'
 require 'middleman-core/renderers/redcarpet'
 
+REDCARPET_OPTIONS = {
+  autolink:           true,
+  fenced_code_blocks: true,
+  tables:             true,
+  no_intra_emphasis:  true,
+  with_toc_data:      true,
+  xhtml:              true,
+  strikethrough:      true,
+  superscript:        true,
+}.freeze
+
 module Middleman
   module HashiCorp
     # Our custom Markdown parser - extends middleman's customer parser so we
@@ -75,7 +86,7 @@ module Middleman
       # @return [String]
       #
       def recursive_render(markdown)
-        Redcarpet::Markdown.new(self.class).render(markdown)
+        Redcarpet::Markdown.new(self.class, REDCARPET_OPTIONS).render(markdown)
       end
 
       #
@@ -248,16 +259,9 @@ module Middleman
       # Override the default Markdown settings to use our customer renderer
       # and the options we want!
       app.set :markdown_engine, :redcarpet
-      app.set :markdown,
-        autolink: true,
-        fenced_code_blocks: true,
-        tables: true,
-        no_intra_emphasis: true,
-        with_toc_data: true,
-        xhtml: true,
-        strikethrough: true,
-        superscript: true,
+      app.set :markdown, REDCARPET_OPTIONS.merge(
         renderer: Middleman::HashiCorp::RedcarpetHTML
+      )
 
       # Set the latest version
       app.set :latest_version, options.version

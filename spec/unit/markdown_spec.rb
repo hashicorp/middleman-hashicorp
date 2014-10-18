@@ -78,6 +78,27 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
+    it 'uses the proper options for recursive markdown' do
+      markdown = <<-EOH.gsub(/^ {8}/, '')
+        This is some markdown
+
+        <div class="center">
+          **Here** is some _html_ though! ;)
+
+          no_intra_emphasis still applies, as does ~~strikethrough~~.
+        </div>
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, '')
+        <p>This is some markdown</p>
+        <div class="center">
+        <p><strong>Here</strong> is some <em>html</em> though! ;)</p>
+        <p>no_intra_emphasis still applies, as does <del>strikethrough</del>.</p>
+        </div>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
+
     it 'supports alert boxes' do
       markdown = <<-EOH.gsub(/^ {8}/, '')
         => This is a success note
