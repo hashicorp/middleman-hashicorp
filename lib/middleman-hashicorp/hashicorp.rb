@@ -41,6 +41,8 @@ module Middleman
       # @param [String] raw
       #
       def block_html(raw)
+        raw = raw.split("\n").map(&:strip).join("\n")
+
         if md = raw.match(/\<(.+?)\>(.*)\<(\/.+?)\>/m)
           open_tag, content, close_tag = md.captures
           "<#{open_tag}>\n#{recursive_render(content)}<#{close_tag}>"
