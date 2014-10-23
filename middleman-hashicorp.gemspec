@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   # Server
   spec.add_dependency 'rack-contrib', '~> 1.1'
   spec.add_dependency 'thin',         '~> 1.6'
+  spec.add_dependency 'rack-ssl-enforcer', '~> 0.2'
 
   # Development dependencies
   spec.add_development_dependency 'rspec', '~> 3.1'
