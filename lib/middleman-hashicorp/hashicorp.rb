@@ -258,6 +258,11 @@ module Middleman
       app.set :images_dir, 'assets/images'
       app.set :fonts_dir,  'assets/fonts'
 
+      # Make custom assets available
+      assets = Proc.new { sprockets.import_asset "ie-compat.js" }
+      app.configure(:development, &assets)
+      app.configure(:build, &assets)
+
       # Override the default Markdown settings to use our customer renderer
       # and the options we want!
       app.set :markdown_engine, :redcarpet
