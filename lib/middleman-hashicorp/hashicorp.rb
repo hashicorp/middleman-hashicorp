@@ -26,7 +26,7 @@ module Middleman
       def list_item(text, list_type)
         # If the <li> does not start with an anchor and includes a <code> tag,
         # create an anchor with the contents of the code tag as its name.
-        if !text.match(/^<a\s+/) && md = text.match(/(<code>(.+?)<\/code>)/)
+        if !text.match(/^(<p>|)<a\s+/) && md = text.match(/(<code>(.+?)<\/code>)/)
           container, name = md.captures
           anchor = anchor_for(name)
 
