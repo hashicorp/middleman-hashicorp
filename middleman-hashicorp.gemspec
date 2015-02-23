@@ -23,25 +23,25 @@ Gem::Specification.new do |spec|
   # Middleman
   spec.add_dependency 'middleman',             '~> 3.3'
   spec.add_dependency 'middleman-minify-html', '~> 3.4'
-  spec.add_dependency 'middleman-livereload',  '~> 3.3'
+  spec.add_dependency 'middleman-livereload',  '~> 3.4'
   spec.add_dependency 'middleman-syntax',      '~> 2.0'
 
   # Assets
-  spec.add_dependency 'bootstrap-sass', '~> 3.2'
+  spec.add_dependency 'bootstrap-sass', '~> 3.3'
   spec.add_dependency 'builder',        '~> 3.2'
   spec.add_dependency 'less',           '~> 2.6'
-  spec.add_dependency 'redcarpet',      '~> 3.1'
+  spec.add_dependency 'redcarpet',      '~> 3.2'
   spec.add_dependency 'therubyracer',   '~> 0.12'
 
   # Server
-  spec.add_dependency 'rack-contrib', '~> 1.1'
+  spec.add_dependency 'rack-contrib', '~> 1.2'
   spec.add_dependency 'rack-rewrite', '~> 1.5'
   spec.add_dependency 'thin',         '~> 1.6'
   spec.add_dependency 'rack-ssl-enforcer', '~> 0.2'
 
   # Development dependencies
-  spec.add_development_dependency 'rspec', '~> 3.1'
+  spec.add_development_dependency 'rspec', '~> 3.2'
 
-  spec.add_development_dependency 'bundler', '~> 1.6'
-  spec.add_development_dependency 'rake',    '~> 10.0'
+  spec.add_development_dependency 'bundler', '~> 1.7'
+  spec.add_development_dependency 'rake',    '~> 10.4'
 end
