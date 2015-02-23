@@ -60,6 +60,26 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
+    it 'does not add links if they already exist' do
+      markdown = <<-EOH.gsub(/^ {8}/, '')
+        - [`/one`](#link_one): Some text
+        - [`/two`](#link_two)
+        - `three` is a regular auto-link
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, '')
+        <ul>
+        <li><a href="#link_one"><code>/one</code></a>: Some text
+        </li>
+        <li><a href="#link_two"><code>/two</code></a>
+        </li>
+        <li><a name="three" /><a href="#three"><code>three</code></a> is a regular auto-link
+        </li>
+        </ul>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
+
     it 'supports markdown inside HTML' do
       markdown = <<-EOH.gsub(/^ {8}/, '')
         This is some markdown

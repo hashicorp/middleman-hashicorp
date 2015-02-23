@@ -15,9 +15,19 @@ RSpec::Matchers.define :render_html do |html|
   match do |markdown|
     @expected = html.strip
 
-    parser = Redcarpet::Markdown.new(described_class)
+    instance = Middleman::HashiCorp::RedcarpetHTML.new
+    instance.middleman_app = middleman_app
+
+    parser = Redcarpet::Markdown.new(instance)
     @actual = parser.render(markdown).strip
 
     @expected == @actual
   end
+end
+
+# The default middleman application server.
+#
+# @return [Middleman::Application]
+def middleman_app
+  @app ||= Middleman::Application.server.inst
 end

@@ -1,3 +1,4 @@
+require 'active_support/core_ext/module/attribute_accessors'
 require 'middleman-core'
 require 'middleman-core/renderers/redcarpet'
 
@@ -24,7 +25,10 @@ module Middleman
       # @param [String] list_type
       #
       def list_item(text, list_type)
-        if md = text.match(/(<code>(.+?)<\/code>)/)
+        md = text.match(/(<code>(.+?)<\/code>)/)
+        linked = !text.match(/<a(.+?)>(.+?)<\/a>/).nil?
+
+        if !md.nil? && !linked
           container, name = md.captures
           anchor = anchor_for(name)
 
