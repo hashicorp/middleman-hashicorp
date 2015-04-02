@@ -178,9 +178,9 @@ module Middleman
 
       if prefixed
         project = repo.split('/', 2).last
-        regex = /#{Regexp.escape(repo)}\/(#{Regexp.escape(project)}_#{Regexp.escape(version)}_.+?)'/
+        regex = /(#{Regexp.escape(project)}_#{Regexp.escape(version)}_.+?)('|")/
       else
-        regex = /#{Regexp.escape(repo)}\/(#{Regexp.escape(version)}_.+?)'/
+        regex = /(#{Regexp.escape(version)}_.+?)('|")/
       end
 
       result = Hash.new { |h,k| h[k] = [] }
