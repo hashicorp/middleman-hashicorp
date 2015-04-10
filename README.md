@@ -42,6 +42,9 @@ activate :hashicorp do |h|
   # Packages are not product-prefixed
   # TODO: Remove this in the future...
   h.bintray_prefixed = false
+
+  # Disable some extensions
+  h.minify_javascript = false
 end
 ```
 

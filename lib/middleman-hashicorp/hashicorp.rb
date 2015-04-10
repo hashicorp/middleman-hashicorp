@@ -244,6 +244,7 @@ module Middleman
     option :bintray_exclude_proc, nil, 'A filter to apply for packages'
     option :bintray_prefixed, true, 'Whether packages are prefixed with the project name'
     option :version, nil, 'The version of the package (e.g. 0.1.0)'
+    option :minify_javascript, true, 'Whether to minimize JS or not'
 
     def initialize(app, options_hash = {}, &block)
       super
@@ -294,14 +295,17 @@ module Middleman
       end
 
       # Configure the build-specific environment
+      minify_javascript = options.minify_javascript
       app.configure :build do
         app.set :product_versions, _self.real_product_versions
 
         # Minify CSS on build
         activate :minify_css
 
-        # Minify Javascript on build
-        activate :minify_javascript
+        if minify_javascript
+          # Minify Javascript on build
+          activate :minify_javascript
+        end
 
         # Minify HTML
         require 'middleman-minify-html'
