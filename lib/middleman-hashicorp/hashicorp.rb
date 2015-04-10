@@ -208,6 +208,9 @@ module Middleman
 
       result.values.each(&:sort!)
       Hash[*result.sort.flatten(1)]
+    rescue OpenURI::HTTPError
+      # Ignore HTTP errors and just have no versions
+      return {}
     end
 
     private
