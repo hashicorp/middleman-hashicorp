@@ -126,7 +126,7 @@ module Middleman
       end
 
       def unindent(string)
-        string.gsub(/^#{string.scan(/^\s*/).min_by{ |l| l.length }}/, "")
+        string.gsub(/^#{string.scan(/^[[:blank:]]+/).min_by { |l| l.length }}/, "")
       end
     end
   end
