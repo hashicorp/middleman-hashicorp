@@ -45,11 +45,11 @@ module Middleman
       # @param [String] raw
       #
       def block_html(raw)
-        raw = raw.split("\n").map(&:strip).join("\n")
+        raw = unindent(raw)
 
         if md = raw.match(/\<(.+?)\>(.*)\<(\/.+?)\>/m)
           open_tag, content, close_tag = md.captures
-          "<#{open_tag}>\n#{recursive_render(content)}<#{close_tag}>"
+          "<#{open_tag}>\n#{recursive_render(unindent(content))}<#{close_tag}>"
         else
           raw
         end
@@ -123,6 +123,10 @@ module Middleman
         else
           return text
         end
+      end
+
+      def unindent(string)
+        string.gsub(/^#{string.scan(/^\s*/).min_by{ |l| l.length }}/, "")
       end
     end
   end
