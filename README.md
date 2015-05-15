@@ -29,10 +29,11 @@ If you are a HashiCorp employee and are deploying a HashiCorp middleman site, yo
 
 ```ruby
 activate :hashicorp do |h|
-  h.version      = '0.1.0'
-  h.bintray_repo = 'mitchellh/packer'
-  h.bintray_user = 'mitchellh'
-  h.bintray_key  = ENV['BINTRAY_API_KEY']
+  h.version         = '0.1.0'
+  h.bintray_enabled = true
+  h.bintray_repo    = 'mitchellh/packer'
+  h.bintray_user    = 'mitchellh'
+  h.bintray_key     = ENV['BINTRAY_API_KEY']
 
   # Filter packages
   h.bintray_exclude_proc = Proc.new do |os, filename|
@@ -51,6 +52,16 @@ end
 As you see, this is just Ruby, so any credentials (such as API keys and passwords) should be read from the `ENV` hash. You can read more about the Bintray integration below.
 
 Almost all other Middleman options may be removed from the `config.rb`. See a HashiCorp project for examples.
+
+Now just run:
+
+```shell
+$ middleman server
+```
+
+and you are off running!
+
+Note: The `middleman build` process is reserved for production use and requires that the `BINTRAY_API_KEY` be set to a valid bintray key if Bintray integration is enabled. In development mode, fake product data is returned.
 
 
 Customizations

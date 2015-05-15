@@ -242,6 +242,7 @@ module Middleman
   end
 
   class HashiCorpExtension < ::Middleman::Extension
+    option :bintray_enabled, true, 'Whether Bintray is enabeld'
     option :bintray_repo, nil, 'The Bintray repo name (e.g. mitchellh/packer)'
     option :bintray_user, nil, 'The Bintray http basic auth user (e.g. mitchellh)'
     option :bintray_key, nil, 'The Bintray http basic auth key (e.g. abcd1234)'
@@ -285,24 +286,23 @@ module Middleman
       # Set the latest version
       app.set :latest_version, options.version
 
+      # Do the bintray dance
+      if options.bintray_enabled
+        app.set :product_versions, _self.real_product_versions
+      else
+        app.set :product_versions, _self.fake_product_versions
+      end
+
       # Configure the development-specific environment
       app.configure :development do
-        if ENV['FETCH_PRODUCT_VERSIONS']
-          app.set :product_versions, _self.real_product_versions
-        else
-          app.set :product_versions, _self.fake_product_versions
-        end
-
-        require 'middleman-livereload'
         # Reload the browser automatically whenever files change
+        require 'middleman-livereload'
         activate :livereload
       end
 
       # Configure the build-specific environment
       minify_javascript = options.minify_javascript
       app.configure :build do
-        app.set :product_versions, _self.real_product_versions
-
         # Minify CSS on build
         activate :minify_css
 
