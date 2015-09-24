@@ -363,6 +363,17 @@ module Middleman
           parts.last.capitalize
         end
       end
+
+      #
+      # Return a page's path on GitHub, relative to its source
+      # repo's root directory.
+      # @param page [Middleman::Sitemap::Resource] a sitemap resource object
+      # @return [String] the page's path on GitHub, relative to the repo's root
+      # directory
+      #
+      def github_path(page)
+        'blob/master/' + page.source_file.match(/website.*/)[0]
+      end
     end
 
     #
