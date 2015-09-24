@@ -7,7 +7,7 @@ class Middleman::HashiCorpExtension
     instance = Middleman::HashiCorpExtension.new(app, bintray_enabled: false)
     instance.app = app # unclear why this needs to be set after, but it must
 
-    it 'should return path/filename.extension for non-index files' do
+    it 'returns path/filename.extension for non-index files' do
       current_page = Middleman::Sitemap::Resource.new(
         app.sitemap,
         '/foo/security.html',
