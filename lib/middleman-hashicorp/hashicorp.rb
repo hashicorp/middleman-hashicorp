@@ -372,7 +372,12 @@ module Middleman
       # directory
       #
       def github_path(page)
-        'blob/master/' + page.source_file.match(/website.*/)[0]
+        match = page.source_file.match(/website.*/)
+        if match
+          'blob/master/' + match[0]
+        else
+          ''
+        end
       end
     end
 
