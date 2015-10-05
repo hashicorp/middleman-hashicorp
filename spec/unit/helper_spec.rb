@@ -15,6 +15,7 @@ class Middleman::HashiCorpExtension
     it "returns the project's GitHub URL if no argument is supplied" do
       expect(@instance.app.github_url).to match("https://www.github.com/hashicorp/this_project")
     end
+
     it "returns false if github_slug has not been set" do
       slugless_app = Middleman::Application.server.inst
       slugless_instance = Middleman::HashiCorpExtension.new(
