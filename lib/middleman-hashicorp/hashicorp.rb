@@ -250,6 +250,8 @@ module Middleman
     option :bintray_prefixed, true, 'Whether packages are prefixed with the project name'
     option :version, nil, 'The version of the package (e.g. 0.1.0)'
     option :minify_javascript, true, 'Whether to minimize JS or not'
+    option :github_slug, nil, "The project's GitHub namespace/project_name duo (e.g. hashicorp/serf)"
+    option :website_root, 'website', "The project's middleman directory relative to the Git root"
 
     def initialize(app, options_hash = {}, &block)
       super
@@ -292,6 +294,9 @@ module Middleman
       else
         app.set :product_versions, _self.fake_product_versions
       end
+
+      app.set :github_slug, options.github_slug
+      app.set :website_root, options.website_root
 
       # Configure the development-specific environment
       app.configure :development do
@@ -365,19 +370,30 @@ module Middleman
       end
 
       #
-      # Return a page's path on GitHub, relative to its source
-      # repo's root directory.
+      # Return the GitHub URL associated with the project
+      # @return [String] the project's URL on GitHub
+      # @return [false] if github_slug hasn't been set
+      #
+      def github_url(specificity = :repo)
+        return false if github_slug.nil?
+        base_url = 'https://www.github.com/' + github_slug
+        if specificity == :repo
+          base_url
+        elsif specificity == :current_page
+          base_url + "/blob/master/" + path_in_repository(current_page)
+        end
+      end
+
+      #
+      # Return a resource's path relative to its source repo's root directory.
       # @param page [Middleman::Sitemap::Resource] a sitemap resource object
-      # @return [String] the page's path on GitHub, relative to the repo's root
+      # @return [String] a resource's path relative to its source repo's root
       # directory
       #
-      def github_path(page)
-        match = page.source_file.match(/website.*/)
-        if match
-          'blob/master/' + match[0]
-        else
-          ''
-        end
+      def path_in_repository(resource)
+        repository_path = resource.path
+        file_extension = resource.source_file.split(resource.path)[1]
+        website_root + "/source/" + repository_path + file_extension
       end
     end
 
