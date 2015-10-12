@@ -27,20 +27,36 @@ class Middleman::HashiCorpExtension
   end
 
   describe "#path_in_repository" do
-    it "returns a resource's path relative to its source repository's root directory" do
+    before(:each) do
       app = middleman_app
-      instance = Middleman::HashiCorpExtension.new(
+      @instance = Middleman::HashiCorpExtension.new(
         app,
         bintray_enabled: false,
-        github_slug: 'hashicorp/this_project',
-        website_root: 'website')
-      instance.app = app
-      current_page = Middleman::Sitemap::Resource.new(
-        instance.app.sitemap,
-        'docs/index.html',
-        '/some/bunch/of/directories/website/source/docs/index.html.markdown')
-      path_in_repository = instance.app.path_in_repository(current_page)
-      expect(path_in_repository).to match('website/source/docs/index.html.markdown')
+        github_slug: "hashicorp/this_project",
+        website_root: "website")
+      @instance.app = app
+    end
+
+    context "when a resource's path string is not within its source_file string" do
+      it "returns a resource's path relative to its source repository's root directory" do
+        current_page = Middleman::Sitemap::Resource.new(
+          @instance.app.sitemap,
+          "intro/examples/cross-provider.html",
+          "/some/bunch/of/directories/intro/examples/cross-provider.markdown")
+        path_in_repository = @instance.app.path_in_repository(current_page)
+        expect(path_in_repository).to match("website/source/intro/examples/cross-provider.markdown")
+      end
+    end
+
+    context "when a resource's path string lies within its source_file string" do
+      it "returns a resource's path relative to its source repository's root directory" do
+        current_page = Middleman::Sitemap::Resource.new(
+          @instance.app.sitemap,
+          "docs/index.html",
+          "/some/bunch/of/directories/website/source/docs/index.html.markdown")
+        path_in_repository = @instance.app.path_in_repository(current_page)
+        expect(path_in_repository).to match("website/source/docs/index.html.markdown")
+      end
     end
   end
 end

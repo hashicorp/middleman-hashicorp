@@ -391,9 +391,9 @@ module Middleman
       # directory
       #
       def path_in_repository(resource)
-        repository_path = resource.path
-        file_extension = resource.source_file.split(resource.path)[1]
-        website_root + "/source/" + repository_path + file_extension
+        relative_path = resource.path.match(/.*\//).to_s
+        file = resource.source_file.split('/').last
+        website_root + "/source/" + relative_path + file
       end
     end
 
