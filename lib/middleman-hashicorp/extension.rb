@@ -1,6 +1,5 @@
 require_relative "bintray"
 require_relative "redcarpet"
-require_relative "releases"
 
 class Middleman::HashiCorpExtension < ::Middleman::Extension
   option :bintray_enabled, true, "Whether Bintray is enabeld"
