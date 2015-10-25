@@ -1,10 +1,10 @@
-require 'spec_helper'
-require 'middleman-hashicorp/hashicorp'
+require "spec_helper"
+require "middleman-hashicorp/extension"
 
 module Middleman::HashiCorp
   describe RedcarpetHTML do
-    it 'adds links to code list elements' do
-      markdown = <<-EOH.gsub(/^ {8}/, '')
+    it "adds links to code list elements" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
         This is a list:
 
         - `one`
@@ -12,7 +12,7 @@ module Middleman::HashiCorp
         - `three has ^ and spaces` with text
         - four
       EOH
-      output = <<-EOH.gsub(/^ {8}/, '')
+      output = <<-EOH.gsub(/^ {8}/, "")
         <p>This is a list:</p>
 
         <ul>
@@ -30,8 +30,8 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
-    it 'adds links to code list elements when they have newlines' do
-      markdown = <<-EOH.gsub(/^ {8}/, '')
+    it "adds links to code list elements when they have newlines" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
         This is a list:
 
         - `one`
@@ -42,7 +42,7 @@ module Middleman::HashiCorp
 
         - four
       EOH
-      output = <<-EOH.gsub(/^ {8}/, '')
+      output = <<-EOH.gsub(/^ {8}/, "")
         <p>This is a list:</p>
 
         <ul>
@@ -60,13 +60,13 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
-    it 'does not add links if they already exist' do
-      markdown = <<-EOH.gsub(/^ {8}/, '')
+    it "does not add links if they already exist" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
         - [`/one`](#link_one): Some text
         - [`/two`](#link_two)
         - `three` is a regular auto-link
       EOH
-      output = <<-EOH.gsub(/^ {8}/, '')
+      output = <<-EOH.gsub(/^ {8}/, "")
         <ul>
         <li><a href="#link_one"><code>/one</code></a>: Some text
         </li>
@@ -80,15 +80,15 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
-    it 'supports markdown inside HTML' do
-      markdown = <<-EOH.gsub(/^ {8}/, '')
+    it "supports markdown inside HTML" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
         This is some markdown
 
         <div class="center">
           **Here** is some _html_ though! ;)
         </div>
       EOH
-      output = <<-EOH.gsub(/^ {8}/, '')
+      output = <<-EOH.gsub(/^ {8}/, "")
         <p>This is some markdown</p>
         <div class="center">
         <p><strong>Here</strong> is some <em>html</em> though! ;)</p>
@@ -98,8 +98,8 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
-    it 'uses the proper options for recursive markdown' do
-      markdown = <<-EOH.gsub(/^ {8}/, '')
+    it "uses the proper options for recursive markdown" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
         This is some markdown
 
         <div class="center">
@@ -108,7 +108,7 @@ module Middleman::HashiCorp
           no_intra_emphasis still applies, as does ~~strikethrough~~.
         </div>
       EOH
-      output = <<-EOH.gsub(/^ {8}/, '')
+      output = <<-EOH.gsub(/^ {8}/, "")
         <p>This is some markdown</p>
         <div class="center">
         <p><strong>Here</strong> is some <em>html</em> though! ;)</p>
@@ -119,8 +119,8 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
-    it 'supports alert boxes' do
-      markdown = <<-EOH.gsub(/^ {8}/, '')
+    it "supports alert boxes" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
         => This is a success note
 
         -> This is an info note
@@ -131,7 +131,7 @@ module Middleman::HashiCorp
 
         And this is a regular paragraph!
       EOH
-      output = <<-EOH.gsub(/^ {8}/, '')
+      output = <<-EOH.gsub(/^ {8}/, "")
         <div class="alert alert-success" role="alert">
         <p>This is a success note</p>
         </div>

@@ -1,14 +1,14 @@
-require 'spec_helper'
-require 'middleman-hashicorp/hashicorp'
+require "spec_helper"
+require "middleman-hashicorp/extension"
 
 class Middleman::HashiCorpExtension
-  describe '#github_url' do
+  describe "#github_url" do
     before(:all) do
       app = middleman_app
       @instance = Middleman::HashiCorpExtension.new(
         app,
         bintray_enabled: false,
-        github_slug: 'hashicorp/this_project')
+        github_slug: "hashicorp/this_project")
       @instance.app = app # unclear why this needs to be set after, but it must
     end
 

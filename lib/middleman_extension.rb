@@ -1,1 +1,1 @@
-require 'middleman-hashicorp'
+require "middleman-hashicorp"
