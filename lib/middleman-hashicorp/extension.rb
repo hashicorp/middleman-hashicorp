@@ -8,6 +8,8 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   option :bintray_key, nil, "The Bintray http basic auth key (e.g. abcd1234)"
   option :bintray_exclude_proc, nil, "A filter to apply for packages"
   option :bintray_prefixed, true, "Whether packages are prefixed with the project name"
+
+  option :name, nil, "The name of the package (e.g. 'consul')"
   option :version, nil, "The version of the package (e.g. 0.1.0)"
   option :minify_javascript, true, "Whether to minimize JS or not"
   option :github_slug, nil, "The project's GitHub namespace/project_name duo (e.g. hashicorp/serf)"
@@ -106,6 +108,50 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     end
 
     #
+    # The formatted operating system name.
+    #
+    # @return [String]
+    #
+    def pretty_os(os)
+      case os
+      when /darwin/
+        "Mac OS X"
+      when /freebsd/
+        "FreeBSD"
+      when /openbsd/
+        "OpenBSD"
+      when /linux/
+        "Linux"
+      when /windows/
+        "Windows"
+      else
+        os.capitalize
+      end
+    end
+
+    #
+    # The formatted architecture name.
+    #
+    # @return [String]
+    #
+    def pretty_arch(arch)
+      case arch
+      when /686/, /386/
+        "32-bit"
+      when /86_64/, /amd64/
+        "64-bit"
+      else
+        parts = arch.split("_")
+
+        if parts.empty?
+          raise "Could not determine pretty arch `#{arch}'!"
+        end
+
+        parts.last.capitalize
+      end
+    end
+
+    #
     # Calculate the architecture for the given filename (from Bintray).
     #
     # @return [String]
@@ -164,10 +210,10 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   #
   def fake_product_versions
     {
-      "HashiOS" => [
-        "/0.1.0_hashios_amd64.zip",
-        "/0.1.0_hashios_i386.zip",
-      ]
+      "HashiOS" => {
+        "amd64" => "/0.1.0_hashios_amd64.zip",
+        "i386" => "/0.1.0_hashios_i386.zip",
+      }
     }
   end
 
@@ -177,12 +223,16 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   # @return [Hash]
   #
   def real_product_versions
-    BintrayAPI.new(
-      repo:     options.bintray_repo,
-      user:     options.bintray_user,
-      key:      options.bintray_key,
-      filter:   options.bintray_exclude_proc,
-      prefixed: options.bintray_prefixed,
-    ).downloads_for_version(options.version)
+    # if options.bintray_enabled
+    #   BintrayAPI.new(
+    #     repo:     options.bintray_repo,
+    #     user:     options.bintray_user,
+    #     key:      options.bintray_key,
+    #     filter:   options.bintray_exclude_proc,
+    #     prefixed: options.bintray_prefixed,
+    #   ).downloads_for_version(options.version)
+    # else
+      Middleman::HashiCorp::Releases.fetch(options.name, options.version)
+    # end
   end
 end
