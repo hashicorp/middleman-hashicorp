@@ -137,6 +137,8 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     #
     def pretty_arch(arch)
       case arch
+      when /all/
+        "Universal (32 and 64-bit)"
       when /686/, /386/
         "32-bit"
       when /86_64/, /amd64/
