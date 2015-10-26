@@ -1,8 +1,9 @@
 require_relative "bintray"
 require_relative "redcarpet"
+require_relative "releases"
 
 class Middleman::HashiCorpExtension < ::Middleman::Extension
-  option :bintray_enabled, true, "Whether Bintray is enabeld"
+  option :bintray_enabled, false, "Whether Bintray is enabeld"
   option :bintray_repo, nil, "The Bintray repo name (e.g. mitchellh/packer)"
   option :bintray_user, nil, "The Bintray http basic auth user (e.g. mitchellh)"
   option :bintray_key, nil, "The Bintray http basic auth key (e.g. abcd1234)"
@@ -50,12 +51,8 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # Set the latest version
     app.set :latest_version, options.version
 
-    # Do the bintray dance
-    if options.bintray_enabled
-      app.set :product_versions, _self.real_product_versions
-    else
-      app.set :product_versions, _self.fake_product_versions
-    end
+    # Do the releases dance
+    app.set :product_versions, _self.product_versions
 
     app.set :github_slug, options.github_slug
     app.set :website_root, options.website_root
@@ -204,33 +201,28 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   end
 
   #
-  # Pre-defined product versions.
-  #
-  # @return [Hash]
-  #
-  def fake_product_versions
-    {
-      "HashiOS" => {
-        "amd64" => "/0.1.0_hashios_amd64.zip",
-        "i386" => "/0.1.0_hashios_i386.zip",
-      }
-    }
-  end
-
-  #
   # Query the Bintray API to get the real product download versions.
   #
   # @return [Hash]
   #
-  def real_product_versions
-    if options.bintray_enabled
-      BintrayAPI.new(
-        repo:     options.bintray_repo,
-        user:     options.bintray_user,
-        key:      options.bintray_key,
-        filter:   options.bintray_exclude_proc,
-        prefixed: options.bintray_prefixed,
-      ).downloads_for_version(options.version)
+  def product_versions
+    if options.bintray_repo
+      if options.bintray_enabled
+        Middleman::HashiCorp::BintrayAPI.new(
+          repo:     options.bintray_repo,
+          user:     options.bintray_user,
+          key:      options.bintray_key,
+          filter:   options.bintray_exclude_proc,
+          prefixed: options.bintray_prefixed,
+        ).downloads_for_version(options.version)
+      else
+        {
+          "HashiOS" => {
+            "amd64" => "/0.1.0_hashios_amd64.zip",
+            "i386" => "/0.1.0_hashios_i386.zip",
+          }
+        }
+      end
     else
       Middleman::HashiCorp::Releases.fetch(options.name, options.version)
     end

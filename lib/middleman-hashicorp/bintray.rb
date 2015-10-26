@@ -59,6 +59,8 @@ class Middleman::HashiCorp::BintrayAPI
           # Custom filter
           next if filter.call(os, filename)
 
+          arch = line.split("_").last.split(".", 2).first
+
           result[os] ||= {}
           result[os][arch] = "https://dl.bintray.com/#{repo}/#{filename}"
         end
