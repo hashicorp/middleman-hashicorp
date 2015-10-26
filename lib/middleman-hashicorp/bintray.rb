@@ -1,14 +1,6 @@
 require "open-uri"
 
 class Middleman::HashiCorp::BintrayAPI
-  OS_TO_HUMAN_MAP = {
-    "darwin"  => "Mac OS X",
-    "freebsd" => "FreeBSD",
-    "openbsd" => "OpenBSD",
-    "linux"   => "Linux",
-    "windows" => "Windows",
-  }.freeze
-
   attr_reader :filter
   attr_reader :prefixed
 
@@ -34,12 +26,10 @@ class Middleman::HashiCorp::BintrayAPI
   # @example
   #   api.downloads_for_version("1.0.0") #=>
   #     {
-  #       "darwin"  => ["0.1.0_darwin_386.zip", "0.1.0_darwin_amd64.zip"],
-  #       "freebsd" => ["0.1.0_freebsd_386.zip", "0.1.0_freebsd_amd64.zip", "0.1.0_freebsd_arm.zip"],
-  #       "linux"   => ["0.1.0_linux_386.zip", "0.1.0_linux_amd64.zip", "0.1.0_linux_arm.zip"],
-  #       "openbsd" => ["0.1.0_openbsd_386.zip", "0.1.0_openbsd_amd64.zip"],
-  #       "windows" => ["0.1.0_windows_386.zip", "0.1.0_windows_amd64.zip"]
-  #     },
+  #       "os"  => {
+  #         "arch" => "http://download.url",
+  #       }
+  #     }
   #
   # @return [Hash]
   #
@@ -54,7 +44,7 @@ class Middleman::HashiCorp::BintrayAPI
       regex = /(#{Regexp.escape(version)}_.+?)('|")/
     end
 
-    result = Hash.new { |h,k| h[k] = [] }
+    result = {}
 
     open(url, options) do |file|
       file.readlines.each do |line|
@@ -69,16 +59,15 @@ class Middleman::HashiCorp::BintrayAPI
           # Custom filter
           next if filter.call(os, filename)
 
-          human_os = OS_TO_HUMAN_MAP.fetch(os, os)
-          result[human_os].push(
-            "https://dl.bintray.com/#{repo}/#{filename}"
-          )
+          arch = line.split("_").last.split(".", 2).first
+
+          result[os] ||= {}
+          result[os][arch] = "https://dl.bintray.com/#{repo}/#{filename}"
         end
       end
     end
 
-    result.values.each(&:sort!)
-    Hash[*result.sort.flatten(1)]
+    result
   rescue OpenURI::HTTPError
     # Ignore HTTP errors and just have no versions
     return {}

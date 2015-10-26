@@ -8,7 +8,10 @@ class Middleman::HashiCorpExtension
       @instance = Middleman::HashiCorpExtension.new(
         app,
         bintray_enabled: false,
-        github_slug: "hashicorp/this_project")
+        name: "consul",
+        version: "0.1.0",
+        github_slug: "hashicorp/this_project",
+      )
       @instance.app = app # unclear why this needs to be set after, but it must
     end
 
@@ -20,7 +23,10 @@ class Middleman::HashiCorpExtension
       slugless_app = Middleman::Application.server.inst
       slugless_instance = Middleman::HashiCorpExtension.new(
         slugless_app,
-        bintray_enabled: false)
+        name: "consul",
+        version: "0.1.0",
+        bintray_enabled: false,
+      )
       slugless_instance.app = slugless_app
       expect(slugless_instance.app.github_url).to eq(false)
     end
@@ -32,8 +38,11 @@ class Middleman::HashiCorpExtension
       @instance = Middleman::HashiCorpExtension.new(
         app,
         bintray_enabled: false,
+        name: "consul",
+        version: "0.1.0",
         github_slug: "hashicorp/this_project",
-        website_root: "website")
+        website_root: "website",
+      )
       @instance.app = app
     end
 

@@ -1,13 +1,16 @@
 require_relative "bintray"
 require_relative "redcarpet"
+require_relative "releases"
 
 class Middleman::HashiCorpExtension < ::Middleman::Extension
-  option :bintray_enabled, true, "Whether Bintray is enabeld"
+  option :bintray_enabled, false, "Whether Bintray is enabeld"
   option :bintray_repo, nil, "The Bintray repo name (e.g. mitchellh/packer)"
   option :bintray_user, nil, "The Bintray http basic auth user (e.g. mitchellh)"
   option :bintray_key, nil, "The Bintray http basic auth key (e.g. abcd1234)"
   option :bintray_exclude_proc, nil, "A filter to apply for packages"
   option :bintray_prefixed, true, "Whether packages are prefixed with the project name"
+
+  option :name, nil, "The name of the package (e.g. 'consul')"
   option :version, nil, "The version of the package (e.g. 0.1.0)"
   option :minify_javascript, true, "Whether to minimize JS or not"
   option :github_slug, nil, "The project's GitHub namespace/project_name duo (e.g. hashicorp/serf)"
@@ -48,12 +51,8 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # Set the latest version
     app.set :latest_version, options.version
 
-    # Do the bintray dance
-    if options.bintray_enabled
-      app.set :product_versions, _self.real_product_versions
-    else
-      app.set :product_versions, _self.fake_product_versions
-    end
+    # Do the releases dance
+    app.set :product_versions, _self.product_versions
 
     app.set :github_slug, options.github_slug
     app.set :website_root, options.website_root
@@ -103,6 +102,50 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     #
     def system_icon(name)
       image_tag("icons/icon_#{name.to_s.downcase}.png")
+    end
+
+    #
+    # The formatted operating system name.
+    #
+    # @return [String]
+    #
+    def pretty_os(os)
+      case os
+      when /darwin/
+        "Mac OS X"
+      when /freebsd/
+        "FreeBSD"
+      when /openbsd/
+        "OpenBSD"
+      when /linux/
+        "Linux"
+      when /windows/
+        "Windows"
+      else
+        os.capitalize
+      end
+    end
+
+    #
+    # The formatted architecture name.
+    #
+    # @return [String]
+    #
+    def pretty_arch(arch)
+      case arch
+      when /686/, /386/
+        "32-bit"
+      when /86_64/, /amd64/
+        "64-bit"
+      else
+        parts = arch.split("_")
+
+        if parts.empty?
+          raise "Could not determine pretty arch `#{arch}'!"
+        end
+
+        parts.last.capitalize
+      end
     end
 
     #
@@ -158,31 +201,30 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   end
 
   #
-  # Pre-defined product versions.
-  #
-  # @return [Hash]
-  #
-  def fake_product_versions
-    {
-      "HashiOS" => [
-        "/0.1.0_hashios_amd64.zip",
-        "/0.1.0_hashios_i386.zip",
-      ]
-    }
-  end
-
-  #
   # Query the Bintray API to get the real product download versions.
   #
   # @return [Hash]
   #
-  def real_product_versions
-    BintrayAPI.new(
-      repo:     options.bintray_repo,
-      user:     options.bintray_user,
-      key:      options.bintray_key,
-      filter:   options.bintray_exclude_proc,
-      prefixed: options.bintray_prefixed,
-    ).downloads_for_version(options.version)
+  def product_versions
+    if options.bintray_repo
+      if options.bintray_enabled
+        Middleman::HashiCorp::BintrayAPI.new(
+          repo:     options.bintray_repo,
+          user:     options.bintray_user,
+          key:      options.bintray_key,
+          filter:   options.bintray_exclude_proc,
+          prefixed: options.bintray_prefixed,
+        ).downloads_for_version(options.version)
+      else
+        {
+          "HashiOS" => {
+            "amd64" => "/0.1.0_hashios_amd64.zip",
+            "i386" => "/0.1.0_hashios_i386.zip",
+          }
+        }
+      end
+    else
+      Middleman::HashiCorp::Releases.fetch(options.name, options.version)
+    end
   end
 end
