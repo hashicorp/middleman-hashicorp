@@ -1,6 +1,10 @@
-require_relative "bintray"
-require_relative "redcarpet"
-require_relative "releases"
+module Middleman
+  module HashiCorp
+    require_relative "bintray"
+    require_relative "redcarpet"
+    require_relative "releases"
+  end
+end
 
 class Middleman::HashiCorpExtension < ::Middleman::Extension
   option :bintray_enabled, false, "Whether Bintray is enabeld"
