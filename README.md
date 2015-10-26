@@ -29,27 +29,14 @@ If you are a HashiCorp employee and are deploying a HashiCorp middleman site, yo
 
 ```ruby
 activate :hashicorp do |h|
-  h.version         = '0.1.0'
-  h.bintray_enabled = true
-  h.bintray_repo    = 'mitchellh/packer'
-  h.bintray_user    = 'mitchellh'
-  h.bintray_key     = ENV['BINTRAY_API_KEY']
-
-  # Filter packages
-  h.bintray_exclude_proc = Proc.new do |os, filename|
-    os == 'windows' # Exclude windows packages
-  end
-
-  # Packages are not product-prefixed
-  # TODO: Remove this in the future...
-  h.bintray_prefixed = false
+  h.name        = "packer"
+  h.version     = "0.7.0"
+  h.github_slug = "mitchellh/packer"
 
   # Disable some extensions
   h.minify_javascript = false
 end
 ```
-
-As you see, this is just Ruby, so any credentials (such as API keys and passwords) should be read from the `ENV` hash. You can read more about the Bintray integration below.
 
 Almost all other Middleman options may be removed from the `config.rb`. See a HashiCorp project for examples.
 
@@ -60,9 +47,6 @@ $ middleman server
 ```
 
 and you are off running!
-
-Note: The `middleman build` process is reserved for production use and requires that the `BINTRAY_API_KEY` be set to a valid bintray key if Bintray integration is enabled. In development mode, fake product data is returned.
-
 
 Customizations
 --------------
@@ -79,9 +63,6 @@ Customizations
 - During build, assets are hashed
 - During build, gzipped assets are also created
 
-### Bintray
-- If applicable, Bintray product versions are automatically downloaded during build. In development, a default HashiOS product is used to avoid API calls. If you have a Bintray API key, you can set the environment variable `FETCH_PRODUCT_VERSIONS` to query the API in development.
-
 ### Helpers
 - `latest_version` - get the version specified in `config.rb` as `version`, but replicated here for use in views.
 
@@ -95,10 +76,16 @@ Customizations
     system_icon(:windows) #=> "<img src=\"/images/icons/....png\">"
     ```
 
-- `arch_for_filename` - get the arch out of a URL or filename (bintray)
+- `pretty_os` - get the human name of the given operating system
 
     ```ruby
-    arch_for_filename('/packer_darwin_amd64.zip') #=> "amd64"
+    pretty_os(:darwin) => "Mac OS X"
+    ```
+
+- `pretty_arch` - get the arch out of an arch
+
+    ```ruby
+    pretty_arch(:amd64) #=> "64-bit"
     ```
 
 ### Markdown
