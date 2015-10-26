@@ -223,16 +223,16 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   # @return [Hash]
   #
   def real_product_versions
-    # if options.bintray_enabled
-    #   BintrayAPI.new(
-    #     repo:     options.bintray_repo,
-    #     user:     options.bintray_user,
-    #     key:      options.bintray_key,
-    #     filter:   options.bintray_exclude_proc,
-    #     prefixed: options.bintray_prefixed,
-    #   ).downloads_for_version(options.version)
-    # else
+    if options.bintray_enabled
+      BintrayAPI.new(
+        repo:     options.bintray_repo,
+        user:     options.bintray_user,
+        key:      options.bintray_key,
+        filter:   options.bintray_exclude_proc,
+        prefixed: options.bintray_prefixed,
+      ).downloads_for_version(options.version)
+    else
       Middleman::HashiCorp::Releases.fetch(options.name, options.version)
-    # end
+    end
   end
 end
