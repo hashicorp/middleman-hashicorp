@@ -91,9 +91,6 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
 
       # Enable cache buster
       activate :asset_hash
-
-      # Gzip files
-      activate :gzip
     end
   end
 
