@@ -16,7 +16,7 @@ class Middleman::HashiCorpExtension
     end
 
     it "returns the project's GitHub URL if no argument is supplied" do
-      expect(@instance.app.github_url).to match("https://www.github.com/hashicorp/this_project")
+      expect(@instance.app.github_url).to match("https://github.com/hashicorp/this_project")
     end
 
     it "returns false if github_slug has not been set" do

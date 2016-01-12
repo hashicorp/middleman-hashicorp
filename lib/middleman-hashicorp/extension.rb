@@ -185,7 +185,7 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     #
     def github_url(specificity = :repo)
       return false if github_slug.nil?
-      base_url = "https://www.github.com/#{github_slug}"
+      base_url = "https://github.com/#{github_slug}"
       if specificity == :repo
         base_url
       elsif specificity == :current_page
