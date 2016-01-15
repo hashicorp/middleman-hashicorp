@@ -19,6 +19,7 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   option :minify_javascript, true, "Whether to minimize JS or not"
   option :github_slug, nil, "The project's GitHub namespace/project_name duo (e.g. hashicorp/serf)"
   option :website_root, "website", "The project's middleman directory relative to the Git root"
+  option :releases_enabled, true, "Whether to fetch releases"
 
   def initialize(app, options_hash = {}, &block)
     super
@@ -209,23 +210,23 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   # @return [Hash]
   #
   def product_versions
-    if options.bintray_repo
-      if options.bintray_enabled
-        Middleman::HashiCorp::BintrayAPI.new(
-          repo:     options.bintray_repo,
-          user:     options.bintray_user,
-          key:      options.bintray_key,
-          filter:   options.bintray_exclude_proc,
-          prefixed: options.bintray_prefixed,
-        ).downloads_for_version(options.version)
-      else
-        {
-          "HashiOS" => {
-            "amd64" => "/0.1.0_hashios_amd64.zip",
-            "i386" => "/0.1.0_hashios_i386.zip",
-          }
+    if !options.bintray_enabled && !options.releases_enabled
+      return {
+        "HashiOS" => {
+          "amd64" => "/0.1.0_hashios_amd64.zip",
+          "i386" => "/0.1.0_hashios_i386.zip",
         }
-      end
+      }
+    end
+
+    if options.bintray_repo
+      Middleman::HashiCorp::BintrayAPI.new(
+        repo:     options.bintray_repo,
+        user:     options.bintray_user,
+        key:      options.bintray_key,
+        filter:   options.bintray_exclude_proc,
+        prefixed: options.bintray_prefixed,
+      ).downloads_for_version(options.version)
     else
       Middleman::HashiCorp::Releases.fetch(options.name, options.version)
     end
