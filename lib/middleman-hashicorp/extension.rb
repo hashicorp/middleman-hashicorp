@@ -119,6 +119,8 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
         "FreeBSD"
       when /openbsd/
         "OpenBSD"
+      when /netbsd/
+        "NetBSD"
       when /linux/
         "Linux"
       when /windows/
