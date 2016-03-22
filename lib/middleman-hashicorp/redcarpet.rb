@@ -25,7 +25,7 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
   #
   def list_item(text, list_type)
     md = text.match(/(<code>(.+?)<\/code>)/)
-    linked = !text.match(/<a(.+?)>(.+?)<\/a>/).nil?
+    linked = !text.match(/^(<p>)?<a(.+?)>(.+?)<\/a>\s*?[-:]?/).nil?
 
     if !md.nil? && !linked
       container, name = md.captures
