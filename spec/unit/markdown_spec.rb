@@ -65,6 +65,7 @@ module Middleman::HashiCorp
         - [`/one`](#link_one): Some text
         - [`/two`](#link_two)
         - `three` is a regular auto-link
+        - [`/four`](#link_four) - Same as one but with a -
       EOH
       output = <<-EOH.gsub(/^ {8}/, "")
         <ul>
@@ -73,6 +74,30 @@ module Middleman::HashiCorp
         <li><a href="#link_two"><code>/two</code></a>
         </li>
         <li><a name="three" /><a href="#three"><code>three</code></a> is a regular auto-link
+        </li>
+        <li><a href="#link_four"><code>/four</code></a> - Same as one but with a -
+        </li>
+        </ul>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
+
+    it "adds links to unordered lists with unrelated content links" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
+        - `one`
+
+        - `two` - has a [link_two](#link_two) inside
+
+        - `three`: is regular but with a colon
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, "")
+        <ul>
+        <li><p><a name="one" /><a href="#one"><code>one</code></a></p>
+        </li>
+        <li><p><a name="two" /><a href="#two"><code>two</code></a> - has a <a href="#link_two">link_two</a> inside</p>
+        </li>
+        <li><p><a name="three" /><a href="#three"><code>three</code></a>: is regular but with a colon</p>
         </li>
         </ul>
       EOH
