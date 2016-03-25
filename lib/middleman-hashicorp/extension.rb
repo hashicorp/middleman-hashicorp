@@ -62,6 +62,8 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     app.set :github_slug, options.github_slug
     app.set :website_root, options.website_root
 
+    app.set :markdown, with_toc_data: true
+
     # Configure the development-specific environment
     app.configure :development do
       # Reload the browser automatically whenever files change
