@@ -188,5 +188,19 @@ module Middleman::HashiCorp
 
       expect(markdown).to render_html(output)
     end
+
+    it "supports fenced code blocks" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
+        ```ruby
+        puts "hi"
+        ```
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, "")
+        <pre><code class="ruby">puts &quot;hi&quot;
+        </code></pre>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
   end
 end
