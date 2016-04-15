@@ -17,6 +17,10 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
     superscript:        true,
   }.freeze
 
+  def initialize(options = {})
+    super(options.merge(REDCARPET_OPTIONS))
+  end
+
   #
   # Override list_item to automatically add links for documentation
   #

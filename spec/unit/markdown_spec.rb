@@ -174,5 +174,19 @@ module Middleman::HashiCorp
 
       expect(markdown).to render_html(output)
     end
+
+    it "supports TOC data" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
+        # Hello World
+        ## Subpath
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, "")
+        <h1 id="hello-world">Hello World</h1>
+
+        <h2 id="subpath">Subpath</h2>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
   end
 end
