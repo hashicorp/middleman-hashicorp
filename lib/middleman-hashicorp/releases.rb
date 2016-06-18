@@ -7,10 +7,19 @@ class Middleman::HashiCorp::Releases
 
   def self.fetch(product, version)
     url = "#{RELEASES_URL}/#{product}/#{version}/index.json"
-    r = JSON.parse(open(url).string,
-      create_additions: false,
-      symbolize_names: true,
-    )
+    begin
+      resp = open(url)
+      r = JSON.parse(resp.string,
+        create_additions: false,
+        symbolize_names: true,
+      )
+    rescue SocketError
+      # Allow offline development for docs pages etc.
+      r = {
+        :builds => []
+      }
+      warn "WARNING: Unable to fetch latest releases for #{product} #{version} (SocketError)"
+    end
 
     # Convert the builds into the following format:
     #
