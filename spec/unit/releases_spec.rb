@@ -18,6 +18,19 @@ describe Middleman::HashiCorp::Releases do
     end
   end
 
+  context "when there is no internet connection" do
+    expected_url = "https://releases.hashicorp.com/terraform/0.6.16/index.json"
+    expected_warn_msg = "WARNING: Unable to fetch latest releases for terraform 0.6.16 (SocketError)\n"
+
+    it "fails gracefully with a warning" do
+      expect(described_class).to receive(:open).with(expected_url).and_raise(SocketError)
+
+      expect {
+        described_class.fetch("terraform", "0.6.16")
+      }.to output(expected_warn_msg).to_stderr
+    end
+  end
+
   it "returns the JSON representation of the version" do
     r = described_class.fetch("consul", "0.1.0")
     expect(r["darwin"]).to eq(
