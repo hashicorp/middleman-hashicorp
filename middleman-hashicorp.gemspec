@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'middleman',             '~> 3.4'
   spec.add_dependency 'middleman-minify-html', '~> 3.4'
   spec.add_dependency 'middleman-livereload',  '~> 3.4'
-  spec.add_dependency 'middleman-syntax',      '~> 2.0'
+  spec.add_dependency 'middleman-syntax',      '~> 3.0'
 
   # Assets
   spec.add_dependency 'bootstrap-sass', '~> 3.3'

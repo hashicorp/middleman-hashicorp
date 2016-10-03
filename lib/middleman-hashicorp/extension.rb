@@ -3,6 +3,7 @@ module Middleman
     require_relative "bintray"
     require_relative "redcarpet"
     require_relative "releases"
+    require_relative "rouge"
   end
 end
 
