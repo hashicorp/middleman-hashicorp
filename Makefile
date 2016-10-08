@@ -1,6 +1,6 @@
 VERSION?=$(shell awk -F\" '/VERSION/ { print $$2; exit }' lib/middleman-hashicorp/version.rb)
 
-docker: build
+docker:
 	@echo "==> Building container v${VERSION}..."
 	@docker build \
 		--file "docker/Dockerfile" \
@@ -9,11 +9,6 @@ docker: build
 		--pull \
 		--rm \
 		.
-
-build:
-	@echo "==> Building gem v${VERSION}..."
-	@rm -rf pkg/
-	@bundle exec rake build
 
 gem:
 	@echo "==> Building and releasing gem v${VERSION}..."

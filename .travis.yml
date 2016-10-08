@@ -9,4 +9,7 @@ branches:
   only:
     - master
 
+before_install:
+  - gem update bundler
+
 bundler_args: --jobs 7
