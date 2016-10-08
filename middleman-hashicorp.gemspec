@@ -18,31 +18,21 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.0.0'
+  spec.required_ruby_version = '>= 2.3'
 
   # Middleman
-  spec.add_dependency 'middleman',             '~> 3.4'
-  spec.add_dependency 'middleman-minify-html', '~> 3.4'
-  spec.add_dependency 'middleman-livereload',  '~> 3.4'
-  spec.add_dependency 'middleman-syntax',      '~> 3.0'
+  spec.add_dependency 'middleman',            '~> 3.4'
+  spec.add_dependency 'middleman-livereload', '~> 3.4'
+  spec.add_dependency 'middleman-syntax',     '~> 3.0'
 
   # Assets
   spec.add_dependency 'bootstrap-sass', '~> 3.3'
   spec.add_dependency 'builder',        '~> 3.2'
-  spec.add_dependency 'less',           '~> 2.6'
-  spec.add_dependency 'redcarpet',      '~> 3.2'
-  spec.add_dependency 'therubyracer',   '~> 0.12'
-
-  # Server
-  spec.add_dependency 'rack-contrib',      '~> 1.2'
-  spec.add_dependency 'rack-protection',   '~> 1.5'
-  spec.add_dependency 'rack-rewrite',      '~> 1.5'
-  spec.add_dependency 'thin',              '~> 1.6'
-  spec.add_dependency 'rack-ssl-enforcer', '~> 0.2'
+  spec.add_dependency 'redcarpet',      '~> 3.3'
 
   # Development dependencies
-  spec.add_development_dependency 'rspec', '~> 3.2'
+  spec.add_development_dependency 'rspec', '~> 3.5'
 
-  spec.add_development_dependency 'bundler', '~> 1.7'
-  spec.add_development_dependency 'rake',    '~> 10.4'
+  spec.add_development_dependency 'bundler', '~> 1.13'
+  spec.add_development_dependency 'rake',    '~> 11.3'
 end
