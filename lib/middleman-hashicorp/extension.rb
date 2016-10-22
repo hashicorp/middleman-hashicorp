@@ -67,7 +67,8 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     app.configure :development do
       # Reload the browser automatically whenever files change
       require "middleman-livereload"
-      activate :livereload
+      activate :livereload,
+        host: "0.0.0.0"
     end
 
     # Configure the build-specific environment
