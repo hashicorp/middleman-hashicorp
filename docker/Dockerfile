@@ -14,15 +14,27 @@ RUN tar -xzvf /s3cmd-1.6.1.tar.gz && \
 # Add the context
 ADD pkg/ /pkg
 
+# Upgrade bundler
+RUN gem update --no-document
+
 # Install the bundle
-RUN gem install /pkg/middleman-hashicorp-*.gem \
+RUN gem install /pkg/middleman-hashicorp-*.gem --no-document \
   && rm -rf /pkg
+
+RUN gem list | grep mini
+
+# For some reason, this isn't installed by default
+# RUN gem install minitest --version "~> 5.9"
 
 # Mounts
 WORKDIR /website
 
-ENTRYPOINT ["bundle", "exec", "middleman"]
+# Expose ports
+EXPOSE 4567
+EXPOSE 35729
+
+ADD docker/entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["server"]
-
-# docker run -v="$(pwd):/website" -p=4567:4567 hashicorp/middleman-hashicorp
