@@ -33,6 +33,10 @@ activate :hashicorp do |h|
   h.version     = "0.7.0"
   h.github_slug = "mitchellh/packer"
 
+  # Disable fetching release information - this is useful for non-product site
+  # or local development.
+  h.releases_enabled = false
+
   # Disable some extensions
   h.minify_javascript = false
 end
