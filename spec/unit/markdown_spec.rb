@@ -90,6 +90,9 @@ module Middleman::HashiCorp
         - `two` - has a [link_two](#link_two) inside
 
         - `three`: is regular but with a colon
+
+        - `four` - is
+          [on the next](#line)
       EOH
       output = <<-EOH.gsub(/^ {8}/, "")
         <ul>
@@ -98,6 +101,9 @@ module Middleman::HashiCorp
         <li><p><a name="two" /><a href="#two"><code>two</code></a> - has a <a href="#link_two">link_two</a> inside</p>
         </li>
         <li><p><a name="three" /><a href="#three"><code>three</code></a>: is regular but with a colon</p>
+        </li>
+        <li><p><a name="four" /><a href="#four"><code>four</code></a> - is
+        <a href="#line">on the next</a></p>
         </li>
         </ul>
       EOH
