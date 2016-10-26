@@ -31,7 +31,7 @@ If you are a HashiCorp employee and are deploying a HashiCorp middleman site, yo
 activate :hashicorp do |h|
   h.name        = "packer"
   h.version     = "0.7.0"
-  h.github_slug = "mitchellh/packer"
+  h.github_slug = "hashicorp/terraform"
 
   # Disable fetching release information - this is useful for non-product site
   # or local development.
