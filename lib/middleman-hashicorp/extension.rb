@@ -1,6 +1,5 @@
 module Middleman
   module HashiCorp
-    require_relative "bintray"
     require_relative "redcarpet"
     require_relative "releases"
     require_relative "rouge"
@@ -8,13 +7,6 @@ module Middleman
 end
 
 class Middleman::HashiCorpExtension < ::Middleman::Extension
-  option :bintray_enabled, false, "Whether Bintray is enabeld"
-  option :bintray_repo, nil, "The Bintray repo name (e.g. mitchellh/packer)"
-  option :bintray_user, nil, "The Bintray http basic auth user (e.g. mitchellh)"
-  option :bintray_key, nil, "The Bintray http basic auth key (e.g. abcd1234)"
-  option :bintray_exclude_proc, nil, "A filter to apply for packages"
-  option :bintray_prefixed, true, "Whether packages are prefixed with the project name"
-
   option :name, nil, "The name of the package (e.g. 'consul')"
   option :version, nil, "The version of the package (e.g. 0.1.0)"
   option :minify_javascript, true, "Whether to minimize JS or not"
@@ -147,7 +139,7 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     end
 
     #
-    # Calculate the architecture for the given filename (from Bintray).
+    # Calculate the architecture for the given filename.
     #
     # @return [String]
     #
@@ -199,30 +191,20 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
   end
 
   #
-  # Query the Bintray API to get the real product download versions.
+  # Query the API to get the real product download versions.
   #
   # @return [Hash]
   #
   def product_versions
-    if !options.bintray_enabled && !options.releases_enabled
-      return {
+    if options.releases_enabled
+      Middleman::HashiCorp::Releases.fetch(options.name, options.version)
+    else
+      {
         "HashiOS" => {
           "amd64" => "/0.1.0_hashios_amd64.zip",
           "i386" => "/0.1.0_hashios_i386.zip",
         }
       }
-    end
-
-    if options.bintray_repo
-      Middleman::HashiCorp::BintrayAPI.new(
-        repo:     options.bintray_repo,
-        user:     options.bintray_user,
-        key:      options.bintray_key,
-        filter:   options.bintray_exclude_proc,
-        prefixed: options.bintray_prefixed,
-      ).downloads_for_version(options.version)
-    else
-      Middleman::HashiCorp::Releases.fetch(options.name, options.version)
     end
   end
 end

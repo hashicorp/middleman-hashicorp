@@ -7,7 +7,7 @@ class Middleman::HashiCorpExtension
       app = middleman_app
       @instance = Middleman::HashiCorpExtension.new(
         app,
-        bintray_enabled: false,
+        releases_enabled: false,
         name: "consul",
         version: "0.1.0",
         github_slug: "hashicorp/this_project",
@@ -25,7 +25,7 @@ class Middleman::HashiCorpExtension
         slugless_app,
         name: "consul",
         version: "0.1.0",
-        bintray_enabled: false,
+        releases_enabled: false,
       )
       slugless_instance.app = slugless_app
       expect(slugless_instance.app.github_url).to eq(false)
@@ -37,7 +37,7 @@ class Middleman::HashiCorpExtension
       app = middleman_app
       @instance = Middleman::HashiCorpExtension.new(
         app,
-        bintray_enabled: false,
+        releases_enabled: false,
         name: "consul",
         version: "0.1.0",
         github_slug: "hashicorp/this_project",
