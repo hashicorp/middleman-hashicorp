@@ -46,6 +46,9 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
       renderer: Middleman::HashiCorp::RedcarpetHTML
     )
 
+    # Do not strip /index.html from directory indexes
+    app.set :strip_index_file, false
+
     # Set the latest version
     app.set :latest_version, options.version
 
