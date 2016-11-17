@@ -124,12 +124,15 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     #
     def pretty_arch(arch)
       case arch
-      when /all/
+      when "all"
         "Universal (32 and 64-bit)"
-      when /686/, /386/
+      when "i686", "i386", "686", "386"
         "32-bit"
-      when /86_64/, /amd64/
+      when "x86_64", "86_64", "amd64"
         "64-bit"
+      when /\-/
+        parts = arch.split("-", 2)
+        "#{pretty_arch(parts[0])} (#{parts[1]})"
       else
         parts = arch.split("_")
 

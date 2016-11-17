@@ -5,8 +5,7 @@ class Middleman::HashiCorpExtension
   describe "#github_url" do
     before(:all) do
       app = middleman_app
-      @instance = Middleman::HashiCorpExtension.new(
-        app,
+      @instance = Middleman::HashiCorpExtension.new(app,
         releases_enabled: false,
         name: "consul",
         version: "0.1.0",
@@ -35,8 +34,7 @@ class Middleman::HashiCorpExtension
   describe "#path_in_repository" do
     before(:each) do
       app = middleman_app
-      @instance = Middleman::HashiCorpExtension.new(
-        app,
+      @instance = Middleman::HashiCorpExtension.new(app,
         releases_enabled: false,
         name: "consul",
         version: "0.1.0",
@@ -65,6 +63,33 @@ class Middleman::HashiCorpExtension
           "/some/bunch/of/directories/website/source/docs/index.html.markdown")
         path_in_repository = @instance.app.path_in_repository(current_page)
         expect(path_in_repository).to match("website/source/docs/index.html.markdown")
+      end
+    end
+  end
+
+  describe "#pretty_arch" do
+    before(:each) do
+      app = middleman_app
+      @instance = Middleman::HashiCorpExtension.new(app,
+        releases_enabled: false,
+      )
+      @instance.app = app
+    end
+
+    [
+      ["all", "Universal (32 and 64-bit)"],
+      ["i686", "32-bit"],
+      ["686", "32-bit"],
+      ["386", "32-bit"],
+      ["i386", "32-bit"],
+      ["86_64", "64-bit"],
+      ["x86_64", "64-bit"],
+      ["amd64", "64-bit"],
+      ["amd64-lxc", "64-bit (lxc)"],
+      ["foo_bar", "Bar"],
+    ].each do |i,e|
+      it "converts #{i} to #{e}" do
+        expect(@instance.app.pretty_arch(i)).to eq(e)
       end
     end
   end
