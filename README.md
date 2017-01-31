@@ -67,6 +67,25 @@ Customizations
 - During build, assets are hashed
 - During build, gzipped assets are also created
 
+### Mega Nav
+HashiCorp has a consistent mega-nav used across all project sites. This is insertable into any document using the following:
+
+```erb
+<%= mega_nav %>
+```
+
+Additionally, you must import the CSS and Javascript:
+
+```js
+// assets/javascripts/application.js
+//= require hashicorp/mega-nav
+```
+
+```scss
+// assets/stylesheets/application.scss
+@import 'hashicorp/mega-nav'
+```
+
 ### Helpers
 - `latest_version` - get the version specified in `config.rb` as `version`, but replicated here for use in views.
 

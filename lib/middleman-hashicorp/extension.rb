@@ -194,6 +194,15 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
       file = resource.source_file.split("/").last
       website_root + "/source/" + relative_path + file
     end
+
+    #
+    # Inserts the mega navigation to be used across all project sites.
+    # @return [String]
+    #
+    def mega_nav
+      f = File.expand_path("../partials/_mega.html.erb", __FILE__)
+      render_individual_file(f, {}, { template_body: File.read(f) })
+    end
   end
 
   #
