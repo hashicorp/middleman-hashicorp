@@ -1,0 +1,124 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="mega-nav-icon-angle" viewBox="0 0 13 7">
+      <polygon points="6.5,6.5 0.7,1.6 1.3,0.8 6.5,5.2 11.7,0.8 12.3,1.6 "/>
+    </symbol>
+    <symbol id="mega-nav-icon-close" viewBox="0 0 13 15">
+      <path vector-effect="non-scaling-stroke" d="M1.1 14L11.9 1M11.9 14L1.1 1"/>
+    </symbol>
+  </defs>
+</svg>
+<div class="mega-nav-banner">
+  <div class="container">
+    <div class="mega-nav-banner-item">
+      by <img src="<%= image_path("mega-nav/logo-hashicorp-wordmark.svg") %>" alt="HashiCorp Logo" />
+    </div>
+    <div class="mega-nav-banner-item">
+      <p class="mega-nav-tagline"><span class="visible-xs text-muted">Learn the</span><span class="hidden-xs text-muted">Learn how Nomad fits into the</span> <img src="<%= image_path("mega-nav/logo-hashicorp.svg") %>" alt="HashiCorp Logo" /> <strong>HashiCorp Suite</strong></p>
+      <div id="#mega-nav" class="mega-nav">
+        <button type="button" id="mega-nav-ctrl" class="mega-nav-ctrl"><svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg><span class="visuallyhidden">Open</span></button>
+        <div id="mega-nav-body-ct" class="mega-nav-body-ct" aria-labelledby="mega-nav-ctrl">
+          <div class="mega-nav-body">
+            <button type="button" id="mega-nav-close" class="mega-nav-close"><svg class="mega-nav-icon mega-nav-icon-close" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-close"></use></svg><span class="visuallyhidden">Close</span></button>
+            <div class="mega-nav-body-header">
+              <div class="mega-nav-body-header-item">
+                <h2 class="mega-nav-h1">Provision, Secure, and&nbsp;Run</h2>
+                <p class="mega-nav-h2">Any infrastructure for any&nbsp;application</p>
+              </div>
+              <div class="mega-nav-body-header-item">
+                <a href="#" class="mega-nav-btn"><img src="<%= image_path("mega-nav/logo-hashicorp.svg") %>" alt="HashiCorp Logo" /> Learn the HashiCorp Suite <svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg></a>
+              </div>
+            </div>
+            <div class="mega-nav-body-grid">
+              <div class="mega-nav-body-grid-item">
+                <h3 class="mega-nav-h3">Provision</h3>
+                <ul class="mega-nav-grid">
+                  <li>
+                    <a href="#" class="mega-nav-grid-item mega-nav-grid-item-vagrant">
+                      <div class="mega-nav-grid-item-img">
+                        <img src="<%= image_path("mega-nav/logo-vagrant.svg") %>" alt="Vagrant Logo" />
+                      </div>
+                      <b>Vagrant</b>
+                      <ul>
+                        <li><span class="mega-nav-tag">Build</span></li>
+                        <li><span class="mega-nav-tag">Test</span></li>
+                      </ul>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="mega-nav-grid-item mega-nav-grid-item-packer">
+                      <div class="mega-nav-grid-item-img">
+                        <img src="<%= image_path("mega-nav/logo-packer.svg") %>" alt="Packer Logo" />
+                      </div>
+                      <b>Packer</b>
+                      <ul>
+                        <li><span class="mega-nav-tag">Package</span></li>
+                      </ul>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="mega-nav-grid-item mega-nav-grid-item-terraform">
+                      <div class="mega-nav-grid-item-img">
+                        <img src="<%= image_path("mega-nav/logo-terraform.svg") %>" alt="Terraform Logo" />
+                      </div>
+                      <b>Terraform</b>
+                      <ul>
+                        <li><span class="mega-nav-tag">Provision</span></li>
+                      </ul>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="mega-nav-body-grid-item">
+                <h3 class="mega-nav-h3">Secure</h3>
+                <ul class="mega-nav-grid">
+                  <li>
+                    <a href="#" class="mega-nav-grid-item mega-nav-grid-item-vault">
+                      <div class="mega-nav-grid-item-img">
+                        <img src="<%= image_path("mega-nav/logo-vault.svg") %>" alt="Vault Logo" />
+                      </div>
+                      <b>Vault</b>
+                      <ul>
+                        <li><span class="mega-nav-tag">Secure</span></li>
+                      </ul>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="mega-nav-body-grid-item">
+                <h3 class="mega-nav-h3">Run</h3>
+                <ul class="mega-nav-grid">
+                  <li>
+                    <a href="#" class="mega-nav-grid-item mega-nav-grid-item-nomad">
+                      <div class="mega-nav-grid-item-img">
+                        <img src="<%= image_path("mega-nav/logo-nomad.svg") %>" alt="Nomad Logo" />
+                      </div>
+                      <b>Nomad</b>
+                      <ul>
+                        <li><span class="mega-nav-tag">Deploy</span></li>
+                      </ul>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="mega-nav-grid-item mega-nav-grid-item-consul">
+                      <div class="mega-nav-grid-item-img">
+                        <img src="<%= image_path("mega-nav/logo-consul.svg") %>" alt="Consul Logo" />
+                      </div>
+                      <b>Consul</b>
+                      <ul>
+                        <li><span class="mega-nav-tag">Maintain</span></li>
+                      </ul>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="mega-nav-body-footer">
+              <p>Seven elements of the modern Application Lifecycle</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
