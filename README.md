@@ -71,7 +71,7 @@ Customizations
 HashiCorp has a consistent mega-nav used across all project sites. This is insertable into any document using the following:
 
 ```erb
-<%= mega_nav %>
+<%= mega_nav :terraform %>
 ```
 
 Additionally, you must import the CSS and Javascript:

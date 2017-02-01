@@ -199,9 +199,11 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # Inserts the mega navigation to be used across all project sites.
     # @return [String]
     #
-    def mega_nav
+    def mega_nav(product, variables = {})
+      variables = variables.dup
+      variables[:product] = product.to_s
       f = File.expand_path("../partials/_mega.html.erb", __FILE__)
-      render_individual_file(f, {}, { template_body: File.read(f) })
+      render_individual_file(f, variables, { template_body: File.read(f) })
     end
   end
 
