@@ -1,8 +1,31 @@
 //
-// HashiCorp Mega Nav
+// Hashicorp Mega Nav
 // --------------------------------------------------
 
 $(function() {
+
+  //handle active product
+
+  var productClass = 'mega-nav-grid-item',
+      productActiveClass = 'is-active',
+      url = window.location.hostname,
+      products = [
+        'vagrant',
+        'packer',
+        'terraform',
+        'vault',
+        'nomad',
+        'consul'
+      ];
+
+  for (var i = 0; i < products.length; i++) {
+    if (url.indexOf(products[i]) !== -1) {
+      $('.' + productClass + '-' + products[i]).addClass(productActiveClass);
+    }
+  }
+
+
+  //handle functionality
 
   var dropDownBreakpoint = window.matchMedia("(min-width: 980px)");
 
@@ -56,6 +79,6 @@ $(function() {
   }
 
   dropDownBreakpoint.addListener(handleDropDownBreakpoint);
-  handleDropDownBreakpoint(dropDownBreakpoint);
+  handleDropDownBreakpoint(dropDownBreakpoint);    
 
 });
