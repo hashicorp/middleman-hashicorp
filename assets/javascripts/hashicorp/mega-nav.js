@@ -1,5 +1,5 @@
 //
-// Hashicorp Mega Nav
+// HashiCorp Mega Nav
 // --------------------------------------------------
 
 $(function() {
