@@ -4,7 +4,7 @@
 
 $mega-nav-active-class:                 'is-active';
 
-$mega-nav-font-family:                  'klavika-web', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$mega-nav-font-family:                  'klavika-web', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $mega-nav-font-size-base:               14px;
 $mega-nav-font-size-h1:                 18px;
@@ -428,7 +428,6 @@ $mega-nav-sandbox-specificity:          4;
     &:focus > .mega-nav-icon-angle-right:last-child {
       transform: translateX(3px) rotate(-90deg);
     }
-      
   }
 
   @media (min-width: $mega-nav-breakpoint-sm) {
@@ -553,7 +552,7 @@ $mega-nav-sandbox-specificity:          4;
         position: absolute;
         top: 100%;
         transform: translateX(-50%);
-        width: 0; 
+        width: 0;
         z-index: $mega-nav-z-index + 1;
       }
 
