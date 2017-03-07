@@ -630,14 +630,6 @@ $mega-nav-sandbox-specificity:          4;
       display: none;
     }
 
-    .mega-nav-h1 {
-      padding-left: mega-nav-em($mega-nav-line-height-base * 1.5, $mega-nav-font-size-h1-desktop);
-    }
-
-    .mega-nav-h2 {
-      padding-left: mega-nav-em($mega-nav-line-height-base * 1.5, $mega-nav-font-size-h2-desktop);
-    }
-
     .mega-nav-h3 {
       padding-left: mega-nav-em($mega-nav-line-height-base, $mega-nav-font-size-h3-desktop);
       padding-top: mega-nav-em($mega-nav-line-height-base / 2, $mega-nav-font-size-h3-desktop);
