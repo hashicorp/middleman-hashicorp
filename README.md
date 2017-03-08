@@ -67,6 +67,16 @@ Customizations
 - During build, assets are hashed
 - During build, gzipped assets are also created
 
+### IE Compatibility 
+
+There are bundled things that make IE behave nicely. Include them like this:
+
+```html
+<!--[if lt IE 9]>
+  <%= javascript_include_tag "ie-compat" %>
+<![endif]-->
+```
+
 ### Turbolinks
 
 Turbolinks highjack links on the same domain and use AJAX to dynamically update
