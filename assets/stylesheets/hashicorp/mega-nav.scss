@@ -4,7 +4,7 @@
 
 $mega-nav-active-class:                 'is-active';
 
-$mega-nav-font-family:                  'klavika-web', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$mega-nav-font-family:                  'klavika-web', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 $mega-nav-font-size-base:               14px;
 $mega-nav-font-size-h1:                 18px;
@@ -200,6 +200,7 @@ $mega-nav-sandbox-specificity:          4;
     display: inline-flex;
     justify-content: center;
     line-height: 1;
+    margin-left: 0.3em;
     padding: 0.5em;
     text-align: center;
   }
@@ -428,7 +429,6 @@ $mega-nav-sandbox-specificity:          4;
     &:focus > .mega-nav-icon-angle-right:last-child {
       transform: translateX(3px) rotate(-90deg);
     }
-      
   }
 
   @media (min-width: $mega-nav-breakpoint-sm) {
@@ -553,7 +553,7 @@ $mega-nav-sandbox-specificity:          4;
         position: absolute;
         top: 100%;
         transform: translateX(-50%);
-        width: 0; 
+        width: 0;
         z-index: $mega-nav-z-index + 1;
       }
 
@@ -628,14 +628,6 @@ $mega-nav-sandbox-specificity:          4;
 
     .mega-nav-close {
       display: none;
-    }
-
-    .mega-nav-h1 {
-      padding-left: mega-nav-em($mega-nav-line-height-base * 1.5, $mega-nav-font-size-h1-desktop);
-    }
-
-    .mega-nav-h2 {
-      padding-left: mega-nav-em($mega-nav-line-height-base * 1.5, $mega-nav-font-size-h2-desktop);
     }
 
     .mega-nav-h3 {
