@@ -67,6 +67,17 @@ Customizations
 - During build, assets are hashed
 - During build, gzipped assets are also created
 
+### Turbolinks
+
+Turbolinks highjack links on the same domain and use AJAX to dynamically update
+only the changed content. This is used by many popular sites, including GitHub.
+To enable turbolinks, include the javascript.
+
+```js
+// assets/javascripts/application.js
+//= require turbolinks
+```
+
 ### Mega Nav
 HashiCorp has a consistent mega-nav used across all project sites. This is insertable into any document using the following:
 

@@ -30,6 +30,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'builder',        '~> 3.2'
   spec.add_dependency 'redcarpet',      '~> 3.3'
 
+  # Turbolinks
+  spec.add_dependency 'turbolinks', '~> 5.0'
+
   # Development dependencies
   spec.add_development_dependency 'rspec', '~> 3.5'
 
