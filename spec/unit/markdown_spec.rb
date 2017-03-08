@@ -111,6 +111,23 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
+    it "does not add links when the code is not first" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
+        - hello - no links here
+        - two - has `code` inside
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, "")
+        <ul>
+        <li>hello - no links here
+        </li>
+        <li>two - has <code>code</code> inside
+        </li>
+        </ul>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
+
     it "supports markdown inside HTML" do
       markdown = <<-EOH.gsub(/^ {8}/, "")
         This is some markdown

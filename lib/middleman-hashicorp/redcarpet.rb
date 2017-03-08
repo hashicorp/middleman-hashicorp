@@ -28,7 +28,7 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
   # @param [String] list_type
   #
   def list_item(text, list_type)
-    md = text.match(/(<code>(.+?)<\/code>)/)
+    md = text.match(/\A(?:<p>)?(<code>(.+?)<\/code>)/)
     linked = !text.match(/\A(<p>)?<a(.+?)>(.+?)<\/a>\s*?[-:]?/).nil?
 
     if !md.nil? && !linked
