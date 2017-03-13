@@ -450,11 +450,6 @@ $mega-nav-sandbox-specificity:          4;
   }
 
   @media (min-width: $mega-nav-breakpoint-sm) {
-    .mega-nav-banner-item {
-      &:first-child {
-        display: block;
-      }
-    }
 
     .mega-nav-btn {
       margin-bottom: mega-nav-em($mega-nav-line-height-base * 2, $mega-nav-btn-font-size);
@@ -551,7 +546,15 @@ $mega-nav-sandbox-specificity:          4;
     .mega-nav-btn {
       width: auto;
     }
+  }
 
+  // Display HashiCorp logo at Bootstrap breakpoint of 768px
+  @media (min-width: 768px){
+    .mega-nav-banner-item {
+      &:first-child {
+        display: block;
+      }
+    }
   }
 
   @media (min-width: $mega-nav-breakpoint-md) {
