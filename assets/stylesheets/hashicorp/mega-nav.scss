@@ -536,16 +536,18 @@ $mega-nav-sandbox-specificity:          4;
     .mega-nav-btn {
       width: auto;
     }
-
   }
 
-  @media (min-width: $mega-nav-breakpoint-md) {
-
+  // Display HashiCorp logo at Bootstrap breakpoint of 768px
+  @media (min-width: 768px){
     .mega-nav-banner-item {
       &:first-child {
         display: block;
       }
     }
+  }
+
+  @media (min-width: $mega-nav-breakpoint-md) {
 
     .mega-nav {
       position: relative;
