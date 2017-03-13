@@ -110,6 +110,16 @@ $mega-nav-sandbox-specificity:          4;
       color: $mega-nav-color-neutral;
     }
 
+    .mega-nav-banner-logo {
+      opacity: 1;
+
+      &:hover {
+        opacity: 0.7;
+        transition: opacity .25s ease-in-out;
+        -moz-transition: opacity .25s ease-in-out;
+        -webkit-transition: opacity .25s ease-in-out;
+      }
+    }
   }
 
     .mega-nav-banner-item {
