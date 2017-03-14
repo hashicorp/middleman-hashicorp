@@ -67,7 +67,7 @@ Customizations
 - During build, assets are hashed
 - During build, gzipped assets are also created
 
-### IE Compatibility 
+### IE Compatibility
 
 There are bundled things that make IE behave nicely. Include them like this:
 
@@ -145,7 +145,7 @@ This extension extends the redcarpet markdown processor to add some additional f
 In addition to "standard markdown", the custom markdown parser supports the following:
 
 #### Auto-linking Anchor Tags
-Sine the majority of HashiCorp's projects use the following syntax to define APIs, this extension automatically converts those to named anchor links:
+Since the majority of HashiCorp's projects use the following syntax to define APIs, this extension automatically converts those to named anchor links:
 
 ```markdown
 - `api_method` - description
@@ -157,6 +157,15 @@ Outputs:
 <ul>
   <li><a name="api_method" /><a href="#api_method"></a> - description</li>
 </ul>
+```
+
+#### Auto-linking Header Tags
+
+Header links will automatically generate linkable hrefs on hover. This can be used to easily link to sub-sections of a page. This _requires_ the following SCSS.
+
+```scss
+// assets/stylesheets/application.scss
+@import 'hashicorp/anchor-links'
 ```
 
 Any special characters are converted to an underscore (`_`).

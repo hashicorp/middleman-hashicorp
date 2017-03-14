@@ -202,11 +202,21 @@ module Middleman::HashiCorp
       markdown = <<-EOH.gsub(/^ {8}/, "")
         # Hello World
         ## Subpath
+        ## Subpath
       EOH
       output = <<-EOH.gsub(/^ {8}/, "")
-        <h1 id="hello-world">Hello World</h1>
-
-        <h2 id="subpath">Subpath</h2>
+        <h1 id="hello-world">
+          <a name="hello-world" class="anchor" href="#hello-world">&raquo;</a>
+          Hello World
+        </h1>
+        <h2 id="subpath">
+          <a name="subpath" class="anchor" href="#subpath">&raquo;</a>
+          Subpath
+        </h2>
+        <h2 id="subpath-1">
+          <a name="subpath-1" class="anchor" href="#subpath-1">&raquo;</a>
+          Subpath
+        </h2>
       EOH
 
       expect(markdown).to render_html(output)
