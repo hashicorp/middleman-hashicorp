@@ -22,6 +22,30 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
   end
 
   #
+  # Override headers to add custom links.
+  #
+  def header(title, level)
+    @headers ||= {}
+
+    name = title.downcase.strip.gsub(/\W+/, '-').gsub(/\A\-/, '')
+
+    i = 0
+    permalink = name
+    while @headers.key?(permalink) do
+      i += 1
+      permalink = "#{name}-#{i}"
+    end
+    @headers[permalink] = true
+
+    return <<-EOH.gsub(/^ {6}/, "")
+      <h#{level} id="#{permalink}">
+        <a name="#{permalink}" class="anchor" href="##{permalink}">&raquo;</a>
+        #{title}
+      </h#{level}>
+    EOH
+  end
+
+  #
   # Override list_item to automatically add links for documentation
   #
   # @param [String] text

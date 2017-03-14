@@ -1,0 +1,36 @@
+//
+// Anchor links must be included to hide/auto-show anchor links.
+//
+
+h1 {
+  .anchor {
+    display: none;
+  }
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  .anchor {
+    color: inherit !important;
+    float: left;
+    margin-left: -15px;
+    padding-right: 5px;
+    line-height: 1.1;
+    text-decoration: none !important;
+    visibility: hidden;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:hover {
+    .anchor {
+      text-decoration: none !important;
+      visibility: visible;
+    }
+  }
+}
