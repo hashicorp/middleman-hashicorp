@@ -20,7 +20,7 @@ module Middleman::HashiCorp
         </li>
         <li><a name="two" /><a href="#two"><code>two</code></a> has some <code>code</code> inside
         </li>
-        <li><a name="three_has_and_spaces" /><a href="#three_has_and_spaces"><code>three has ^ and spaces</code></a> with text
+        <li><a name="three-has-and-spaces" /><a href="#three-has-and-spaces"><code>three has ^ and spaces</code></a> with text
         </li>
         <li>four
         </li>
@@ -50,7 +50,7 @@ module Middleman::HashiCorp
         </li>
         <li><p><a name="two" /><a href="#two"><code>two</code></a> has some <code>code</code> inside</p>
         </li>
-        <li><p><a name="three_has_and_spaces" /><a href="#three_has_and_spaces"><code>three has ^ and spaces</code></a> with text</p>
+        <li><p><a name="three-has-and-spaces" /><a href="#three-has-and-spaces"><code>three has ^ and spaces</code></a> with text</p>
         </li>
         <li><p>four</p>
         </li>

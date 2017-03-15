@@ -26,26 +26,11 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
   # Override headers to add custom links.
   #
   def header(title, level)
-    @headers ||= {}
-
-    name = title
-      .downcase
-      .strip
-      .gsub(/<\/?[^>]*>/, '') # Strip links
-      .gsub(/\W+/, '-')       # Whitespace to -
-      .gsub(/\A\-/, '')       # No leading -
-
-    i = 0
-    permalink = name
-    while @headers.key?(permalink) do
-      i += 1
-      permalink = "#{name}-#{i}"
-    end
-    @headers[permalink] = true
+    anchor = anchor_link(title)
 
     return <<-EOH.gsub(/^ {6}/, "")
-      <h#{level} id="#{permalink}">
-        <a name="#{permalink}" class="anchor" href="##{permalink}">&raquo;</a>
+      <h#{level} id="#{anchor}">
+        <a name="#{anchor}" class="anchor" href="##{anchor}">&raquo;</a>
         #{title}
       </h#{level}>
     EOH
@@ -58,12 +43,14 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
   # @param [String] list_type
   #
   def list_item(text, list_type)
+    @anchors ||= {}
+
     md = text.match(/\A(?:<p>)?(<code>(.+?)<\/code>)/)
     linked = !text.match(/\A(<p>)?<a(.+?)>(.+?)<\/a>\s*?[-:]?/).nil?
 
     if !md.nil? && !linked
       container, name = md.captures
-      anchor = anchor_for(name)
+      anchor = anchor_link(name)
 
       replace = %|<a name="#{anchor}" /><a href="##{anchor}">#{container}</a>|
       text.sub!(container, replace)
@@ -101,19 +88,29 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
   private
 
   #
-  # Remove any special characters from the anchor name.
+  # Generate an anchor link from the generated raw value.
   #
-  # @example
-  #   anchor_for("this") #=> "this"
-  #   anchor_for("this is cool") #=> "this_is_cool"
-  #   anchor_for("this__is__cool!") #=> "this__is__cool_"
-  #
-  #
-  # @param [String] text
   # @return [String]
   #
-  def anchor_for(text)
-    text.gsub(/[^[:word:]]/, "_").squeeze("_")
+  def anchor_link(raw)
+    @anchors ||= {}
+
+    name = raw
+      .downcase
+      .strip
+      .gsub(/<\/?[^>]*>/, '') # Strip links
+      .gsub(/\W+/, '-')       # Whitespace to -
+      .gsub(/\A\-/, '')       # No leading -
+      .squeeze('-')           # Collapse --
+
+    i = 0
+    link = name
+    while @anchors.key?(link) do
+      i += 1
+      link = "#{name}-#{i}"
+    end
+    @anchors[link] = true
+    return link
   end
 
   #
