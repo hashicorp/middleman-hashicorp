@@ -1,5 +1,6 @@
 require "middleman-core"
 require "middleman-core/renderers/redcarpet"
+require "nokogiri"
 require "active_support/core_ext/module/attribute_accessors"
 
 # Our custom Markdown parser - extends middleman's customer parser so we pick up
@@ -27,7 +28,12 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
   def header(title, level)
     @headers ||= {}
 
-    name = title.downcase.strip.gsub(/\W+/, '-').gsub(/\A\-/, '')
+    name = title
+      .downcase
+      .strip
+      .gsub(/<\/?[^>]*>/, '') # Strip links
+      .gsub(/\W+/, '-')       # Whitespace to -
+      .gsub(/\A\-/, '')       # No leading -
 
     i = 0
     permalink = name

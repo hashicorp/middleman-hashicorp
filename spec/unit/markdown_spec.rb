@@ -203,6 +203,7 @@ module Middleman::HashiCorp
         # Hello World
         ## Subpath
         ## Subpath
+        ## `code` Subpath
       EOH
       output = <<-EOH.gsub(/^ {8}/, "")
         <h1 id="hello-world">
@@ -216,6 +217,10 @@ module Middleman::HashiCorp
         <h2 id="subpath-1">
           <a name="subpath-1" class="anchor" href="#subpath-1">&raquo;</a>
           Subpath
+        </h2>
+        <h2 id="code-subpath">
+          <a name="code-subpath" class="anchor" href="#code-subpath">&raquo;</a>
+          <code>code</code> Subpath
         </h2>
       EOH
 
