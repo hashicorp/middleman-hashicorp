@@ -2,10 +2,7 @@
 // HashiCorp Mega Nav
 // --------------------------------------------------
 
-$(function() {
-
-  //handle active product
-
+var HashiMegaNav = function() {
   var productClass = 'mega-nav-grid-item',
       productActiveClass = 'is-active',
       url = window.location.hostname,
@@ -24,9 +21,6 @@ $(function() {
     }
   }
 
-
-  //handle functionality
-
   var dropDownBreakpoint = window.matchMedia("(min-width: 980px)");
 
   function megaNavModal() {
@@ -44,7 +38,6 @@ $(function() {
     $('#mega-nav-close').on('click.megaNav', function() {
       $('#mega-nav-body-ct').modal('hide');
     });
-
   }
 
   function megaNavModalDestroy() {
@@ -67,7 +60,6 @@ $(function() {
   }
 
   function handleDropDownBreakpoint(breakpoint) {
-
     if (breakpoint.matches) {
       megaNavModalDestroy();
       megaNavDropDown();
@@ -75,10 +67,11 @@ $(function() {
       megaNavDropDownDestroy();
       megaNavModal();
     }
-
   }
 
   dropDownBreakpoint.addListener(handleDropDownBreakpoint);
-  handleDropDownBreakpoint(dropDownBreakpoint);    
+  handleDropDownBreakpoint(dropDownBreakpoint);
+}
 
-});
+// Handle document ready function and the turbolinks load.
+$(document).on("ready turbolinks:load", HashiMegaNav);
