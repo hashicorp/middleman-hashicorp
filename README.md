@@ -99,6 +99,56 @@ To enable turbolinks, include the javascript.
 //= require turbolinks
 ```
 
+### Mobile Sidebar
+
+The mobile sidebar is displayed on mobile and small screens as a hamburger menu.
+It requires some additional markup and css for configuration. First, define the
+following variables in your scss:
+
+```scss
+$sidebar-background-color
+$sidebar-link-color
+$sidebar-font-family
+$sidebar-font-weight
+$sidebar-font-size
+$sidebar-link-color-hover
+```
+
+Then include the scss scaffold:
+
+```scss
+@import 'hashicorp/sidebar';
+```
+
+Next, create some markup like this:
+
+```html
+<div class="sidebar-overlay"></div>
+
+<aside class="sidebar" role="navigation">
+  <div class="sidebar-header">
+    <img src="images/my-image.svg" alt="My Header" height="42">
+  </div>
+
+  <ul class="nav sidebar-nav">
+    <li><a href="/">Home</a></li>
+  </ul>
+
+  <!-- Optional -->
+  <div class="divider"></div>
+
+  <ul class="nav sidebar-nav">
+    <li><a href="/">Other</li>
+  </ul>
+</aside>
+```
+
+Finally include the required javascript:
+
+```js
+//= require hashicorp/sidebar
+```
+
 ### Mega Nav
 HashiCorp has a consistent mega-nav used across all project sites. This is insertable into any document using the following:
 
