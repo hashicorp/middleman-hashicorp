@@ -77,6 +77,17 @@ There are bundled things that make IE behave nicely. Include them like this:
 <![endif]-->
 ```
 
+### Inline SVGs
+
+Getting SVGs out of the asset pipeline and into the DOM can be hard, but not
+with the magic `inline_svg` helper!
+
+```erb
+<%= inline_svg "my-asset.svg" %>
+```
+
+It supports configuring the class, height, width, and viewbox.
+
 ### Turbolinks
 
 Turbolinks highjack links on the same domain and use AJAX to dynamically update
