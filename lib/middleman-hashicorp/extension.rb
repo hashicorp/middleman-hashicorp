@@ -144,8 +144,11 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     #
     # @return [String] (html)
     #
-    def system_icon(name)
-      image_tag("icons/icon_#{name.to_s.downcase}.png")
+    def system_icon(name, options = {})
+      image_tag("icons/icon_#{name.to_s.downcase}.png", {
+        height: 75,
+        width: 75,
+      }.merge(options))
     end
 
     #
