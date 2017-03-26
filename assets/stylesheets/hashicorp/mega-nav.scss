@@ -272,6 +272,11 @@ $mega-nav-sandbox-specificity:          4;
     &:hover,
     &:focus {
       color: tint($mega-nav-color-black, 20);
+      outline: none;
+    }
+
+    &:active {
+      outline: none;
     }
   }
 

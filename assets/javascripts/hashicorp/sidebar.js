@@ -18,12 +18,12 @@ var HashiSidebar = function() {
 
   // Hide the sidebar when the user clicks on the overlay. The overlay is
   // only "clickable" when it's active.
-  $overlay.on('click', function(e){
+  $overlay.unbind().on('click', function(e){
     hideSidebar();
   });
 
   // Show the sidebar when the user clicks the hamburger menu.
-  $toggle.on('click', function(e) {
+  $toggle.unbind().on('click', function(e) {
     e.preventDefault(); // Don't jump page to "#"
 
     // Only activate the sidebar if it's not already active. Since these
