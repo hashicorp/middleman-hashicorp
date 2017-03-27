@@ -1,5 +1,5 @@
 module Middleman
   module HashiCorp
-    VERSION = "0.3.21"
+    VERSION = "0.3.22"
   end
 end
