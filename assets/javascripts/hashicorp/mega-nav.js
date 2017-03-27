@@ -2,10 +2,7 @@
 // HashiCorp Mega Nav
 // --------------------------------------------------
 
-$(function() {
-
-  //handle active product
-
+var HashiMegaNav = function() {
   var productClass = 'mega-nav-grid-item',
       productActiveClass = 'is-active',
       url = window.location.hostname,
@@ -24,61 +21,51 @@ $(function() {
     }
   }
 
+  var $body = $('#mega-nav-body-ct');
+  var $arrow = $('#mega-nav-ctrl');
+  var $nav = $arrow.parent();
+  var $close = $('#mega-nav-close');
 
-  //handle functionality
-
-  var dropDownBreakpoint = window.matchMedia("(min-width: 980px)");
-
-  function megaNavModal() {
-    $('#mega-nav-body-ct').attr({
-      role: 'dialog',
-      tabindex: -1
-    });
-
-    $('#mega-nav-ctrl').on('click.megaNav', function(){
-      $('#mega-nav-body-ct').modal({
-        backdrop: false
-      });
-    });
-
-    $('#mega-nav-close').on('click.megaNav', function() {
-      $('#mega-nav-body-ct').modal('hide');
-    });
-
+  function matchesBreakpoint() {
+    return window.matchMedia("(min-width: 980px)").matches;
   }
 
-  function megaNavModalDestroy() {
-    $('#mega-nav-ctrl').off('click.megaNav');
-    $('#mega-nav-close').off('click.megaNav');
-    $('#mega-nav-body-ct')
-      .modal('hide')
-      .removeAttr('role tabindex style')
-      .data('bs.modal', null);
-  }
-
-  function megaNavDropDown() {
-    $('#mega-nav-ctrl').attr('data-toggle', 'dropdown');
-  }
-
-  function megaNavDropDownDestroy() {
-    $('#mega-nav-ctrl').parent().removeClass('open');
-    $('#mega-nav-ctrl').removeAttr('data-toggle aria-expanded');
-    $('#mega-nav-body-ct').removeAttr('aria-labelledby');
-  }
-
-  function handleDropDownBreakpoint(breakpoint) {
-
-    if (breakpoint.matches) {
-      megaNavModalDestroy();
-      megaNavDropDown();
+  function openNav() {
+    if(matchesBreakpoint()) {
+      $body.slideDown('fast');
+      $nav.addClass('open');
     } else {
-      megaNavDropDownDestroy();
-      megaNavModal();
+      $body.fadeIn('fast');
     }
-
   }
 
-  dropDownBreakpoint.addListener(handleDropDownBreakpoint);
-  handleDropDownBreakpoint(dropDownBreakpoint);    
+  function closeNav() {
+    if(matchesBreakpoint()) {
+      $body.slideUp('fast');
+      $nav.removeClass('open');
+    } else {
+      $body.fadeOut('fast');
+    }
+  }
 
-});
+  function isNavOpen() {
+    return $nav.hasClass('open');
+  }
+
+  $arrow.unbind().on('click', function(e) {
+    e.preventDefault(); // Don't jump page to "#"
+
+    if(isNavOpen()) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  $close.unbind().on('click', function() {
+    closeNav();
+  });
+}
+
+// Handle document ready function and the turbolinks load.
+$(document).on("ready turbolinks:load", HashiMegaNav);
