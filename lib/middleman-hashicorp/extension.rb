@@ -89,7 +89,6 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # @option options [String] :class
     # @option options [String] :width
     # @option options [String] :height
-    # @option options [String] :view_box
     #
     # @return [String]
     #
@@ -130,10 +129,6 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
           svg["height"] = options[:height]
         end
 
-        if options[:view_box].present?
-          svg["viewBox"] = options[:view_box]
-        end
-
         doc
       end
     end
@@ -145,7 +140,7 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # @return [String] (html)
     #
     def system_icon(name, options = {})
-      image_tag("icons/icon_#{name.to_s.downcase}.png", {
+      inline_svg("icons/icon_#{name.to_s.downcase}.svg", {
         height: 75,
         width: 75,
       }.merge(options))
