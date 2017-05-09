@@ -2,7 +2,7 @@ FROM ruby:2.3-alpine
 MAINTAINER Seth Vargo <seth@hashicorp.com>
 
 # Install packages
-RUN apk add --no-cache build-base curl nodejs python py-setuptools wget git
+RUN apk add --no-cache build-base curl jq nodejs python py-setuptools wget git
 
 # Install s3cmd
 ADD https://github.com/s3tools/s3cmd/releases/download/v1.6.1/s3cmd-1.6.1.tar.gz /s3cmd-1.6.1.tar.gz
