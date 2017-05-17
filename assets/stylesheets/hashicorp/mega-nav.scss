@@ -341,7 +341,8 @@ $mega-nav-sandbox-specificity:          4;
     > b {
       display: block;
       font-size: mega-nav-em($mega-nav-font-size-h1);
-      font-weight: 500;
+      font-weight: 600;
+      letter-spacing: -0.02em;
     }
 
     > ul {
