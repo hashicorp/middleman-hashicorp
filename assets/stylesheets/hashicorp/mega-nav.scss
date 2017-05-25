@@ -136,6 +136,7 @@ $mega-nav-sandbox-specificity:          4;
     align-items: center;
     display: inline-flex;
     margin-bottom: 0;
+    vertical-align: -1px;
 
     > img {
       margin: 0 mega-nav-em(6px, 16px) 0 mega-nav-em(8px, 16px);
@@ -147,6 +148,7 @@ $mega-nav-sandbox-specificity:          4;
     font-family: $mega-nav-font-family;
     font-size: $mega-nav-font-size-base;
     line-height: $mega-nav-line-height-base / $mega-nav-font-size-base;
+    margin-top: 3px;
 
     h1, h2, h3, h4, h5, h6,
     ul, p {
@@ -189,6 +191,7 @@ $mega-nav-sandbox-specificity:          4;
     display: inline-block;
     fill: currentColor;
     height: 1em;
+    margin-left: 0.3em;
     stroke: currentColor;
     width: 1em;
   }
@@ -206,20 +209,34 @@ $mega-nav-sandbox-specificity:          4;
   .mega-nav-ctrl {
     align-items: center;
     background-color: transparent;
-    border: 1px solid currentColor;
+    border: 0;
     display: inline-flex;
     justify-content: center;
-    line-height: 1;
     margin-left: 0.3em;
-    outline: none;
-    padding: 0.5em;
+    padding: 0;
     text-align: center;
+    vertical-align: middle;
 
     &:active,
     &:focus,
     &:hover,
     &:visited {
       outline: none;
+    }
+
+    strong {
+      margin: 0 0.5em;
+    }
+  }
+
+  .mega-nav-icon-outline {
+    border: 1px solid;
+    margin-top: -3px;
+    padding: 0.5em;
+
+    .mega-nav-icon {
+      display: block;
+      margin: 0;
     }
   }
 
