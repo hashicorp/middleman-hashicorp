@@ -15,16 +15,22 @@
         <a class="mega-nav-banner-logo" href="https://www.hashicorp.com"><img src="<%= image_path("mega-nav/logo-hashicorp-wordmark.svg") %>" alt="HashiCorp Logo" /></a>
       </div>
       <div class="mega-nav-banner-item">
-        <p class="mega-nav-tagline"><span class="visible-xs text-muted">Learn the</span><span class="hidden-xs text-muted">Learn how <%= product.titleize %> fits into the</span> <img src="<%= image_path("mega-nav/logo-hashicorp.svg") %>" alt="HashiCorp Logo" /> <strong>HashiCorp Suite</strong></p>
+        <p class="mega-nav-tagline"><span class="visible-xs text-muted">Learn the</span><span class="hidden-xs text-muted">Learn how <%= product.titleize %> fits into the</span></p>
         <div id="#mega-nav" class="mega-nav">
-          <button type="button" id="mega-nav-ctrl" class="mega-nav-ctrl"><svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg><span class="visuallyhidden">Open</span></button>
+          <button type="button" id="mega-nav-ctrl" class="mega-nav-ctrl">
+            <img src="<%= image_path("mega-nav/logo-hashicorp.svg") %>" alt="HashiCorp Logo" />
+            <strong>HashiCorp Suite</strong>
+            <span class="mega-nav-icon-outline">
+              <svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg><span class="visuallyhidden">Open</span>
+            </span>
+          </button>
           <div id="mega-nav-body-ct" class="mega-nav-body-ct" aria-labelledby="mega-nav-ctrl">
             <div class="mega-nav-body">
               <button type="button" id="mega-nav-close" class="mega-nav-close"><svg class="mega-nav-icon mega-nav-icon-close" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-close"></use></svg><span class="visuallyhidden">Close</span></button>
               <div class="mega-nav-body-header">
                 <div class="mega-nav-body-header-item">
-                  <h2 class="mega-nav-h1">Provision, Secure, and Run</h2>
-                  <p class="mega-nav-h2">Any infrastructure for any application</p>
+                  <h2 class="mega-nav-h1">Provision, Secure, Connect, and&nbsp;Run</h2>
+                  <p class="mega-nav-h2">Any infrastructure for any&nbsp;application</p>
                 </div>
                 <div class="mega-nav-body-header-item">
                   <a href="https://www.hashicorp.com/devops-defined/" class="mega-nav-btn"><img src="<%= image_path("mega-nav/logo-hashicorp.svg") %>" alt="HashiCorp Logo" /> Learn the HashiCorp Suite <svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg></a>
@@ -87,6 +93,22 @@
                   </ul>
                 </div>
                 <div class="mega-nav-body-grid-item">
+                  <h3 class="mega-nav-h3">Connect</h3>
+                  <ul class="mega-nav-grid">
+                    <li>
+                      <a href="https://www.consul.io" class="mega-nav-grid-item mega-nav-grid-item-consul">
+                        <div class="mega-nav-grid-item-img">
+                          <img src="<%= image_path("mega-nav/logo-consul.svg") %>" alt="Consul Logo" />
+                        </div>
+                        <b>Consul</b>
+                        <ul>
+                          <li><span class="mega-nav-tag">Maintain</span></li>
+                        </ul>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mega-nav-body-grid-item">
                   <h3 class="mega-nav-h3">Run</h3>
                   <ul class="mega-nav-grid">
                     <li>
@@ -97,17 +119,6 @@
                         <b>Nomad</b>
                         <ul>
                           <li><span class="mega-nav-tag">Deploy</span></li>
-                        </ul>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.consul.io" class="mega-nav-grid-item mega-nav-grid-item-consul">
-                        <div class="mega-nav-grid-item-img">
-                          <img src="<%= image_path("mega-nav/logo-consul.svg") %>" alt="Consul Logo" />
-                        </div>
-                        <b>Consul</b>
-                        <ul>
-                          <li><span class="mega-nav-tag">Maintain</span></li>
                         </ul>
                       </a>
                     </li>
