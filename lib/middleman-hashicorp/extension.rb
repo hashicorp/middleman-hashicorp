@@ -264,8 +264,9 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # @return [String]
     #
     def enterprise_alert(product, variables = {})
-      variables = variables.dup
-      variables[:product] = product.to_s
+      variables = variables.merge(
+        product: product.to_s,
+      )
       f = File.expand_path("../partials/_enterprise-alert.html.erb", __FILE__)
       render_individual_file(f, variables, { template_body: File.read(f) })
     end
