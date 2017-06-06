@@ -1,0 +1,55 @@
+$label-enterprise-font-size: 12px;
+$label-enterprise-font-size-lg: 16px;
+$label-enterprise-alignment-tweak: 1px; //tweak font not aligning vertically centered
+
+$header-font-family: 'klavika-web', Helvetica, sans-serif;
+
+.label-enterprise {
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  display: inline-block;
+  font-family: $header-font-family;
+  font-size: $label-enterprise-font-size;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-left: 1 / 4 * 1em;
+  margin-right: 1 / 4 * 1em;
+  padding: (3px + $label-enterprise-alignment-tweak) / $label-enterprise-font-size * 1em 
+            4px / $label-enterprise-font-size * 1em 
+            (3px - $label-enterprise-alignment-tweak) / $label-enterprise-font-size * 1em;
+  position: relative;
+  text-transform: uppercase;
+  top: -2px / $label-enterprise-font-size * 1em;
+  vertical-align: middle;
+	
+  .alert-enterprise & {
+    margin-left: 0;
+    margin-right: 0;
+    position: static;
+  }
+}
+
+a.label-enterprise {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+	
+  &:hover,
+  &:focus {
+    background-color: #333;
+  }
+}
+
+.label-enterprise-lg {
+  font-size: $label-enterprise-font-size-lg;
+}
+
+.alert-enterprise {
+  background-color: #fafafa;
+  border: 1px solid black;
+  display: block;
+  margin-bottom: 15px;
+  padding: 14px;
+}

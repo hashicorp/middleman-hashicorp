@@ -258,6 +258,18 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
       f = File.expand_path("../partials/_mega.html.erb", __FILE__)
       render_individual_file(f, variables, { template_body: File.read(f) })
     end
+
+    #
+    # Inserts the enterprise alert to be used across all project sites.
+    # @return [String]
+    #
+    def enterprise_alert(product, variables = {})
+      variables = variables.merge(
+        product: product.to_s,
+      )
+      f = File.expand_path("../partials/_enterprise-alert.html.erb", __FILE__)
+      render_individual_file(f, variables, { template_body: File.read(f) })
+    end
   end
 
   #
