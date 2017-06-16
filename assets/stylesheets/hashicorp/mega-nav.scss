@@ -442,7 +442,7 @@ $mega-nav-sandbox-specificity:          4;
     font-weight: 500;
     line-height: 1;
     margin-bottom: mega-nav-em($mega-nav-line-height-base, $mega-nav-btn-font-size);
-    padding: mega-nav-em(($mega-nav-btn-height - $mega-nav-btn-font-size) / 2, $mega-nav-btn-font-size);
+    padding: mega-nav-em(($mega-nav-btn-height - $mega-nav-btn-font-size) / 2, $mega-nav-btn-font-size) mega-nav-em($mega-nav-btn-font-size);
     text-transform: uppercase;
     width: 100%;
 
