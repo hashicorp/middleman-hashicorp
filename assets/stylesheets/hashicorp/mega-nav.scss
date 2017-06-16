@@ -109,6 +109,7 @@ $mega-nav-sandbox-specificity:          4;
     .text-muted {
       color: $mega-nav-color-neutral;
     }
+  }
 
     .mega-nav-banner-logo {
       opacity: 1;
@@ -119,8 +120,11 @@ $mega-nav-sandbox-specificity:          4;
         -moz-transition: opacity .25s ease-in-out;
         -webkit-transition: opacity .25s ease-in-out;
       }
+
+      > img {
+        height: 25px;
+      }
     }
-  }
 
     .mega-nav-banner-item {
       &:first-child {
