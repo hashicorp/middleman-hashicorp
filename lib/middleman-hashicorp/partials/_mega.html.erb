@@ -18,11 +18,13 @@
         <p class="mega-nav-tagline"><span class="visible-xs text-muted">Learn the</span><span class="hidden-xs text-muted">Learn how <%= product.titleize %> fits into the</span></p>
         <div id="#mega-nav" class="mega-nav">
           <button type="button" id="mega-nav-ctrl" class="mega-nav-ctrl">
-            <img src="<%= image_path("mega-nav/logo-hashicorp.svg") %>" alt="HashiCorp Logo" />
-            <strong>HashiCorp Suite</strong>
-            <span class="mega-nav-icon-outline">
-              <svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg><span class="visuallyhidden">Open</span>
-            </span>
+            <div class="mega-nav-ctrl-items">
+              <img src="<%= image_path("mega-nav/logo-hashicorp.svg") %>" alt="HashiCorp Logo" />
+              <strong>HashiCorp Suite</strong>
+              <span class="mega-nav-icon-outline">
+                <svg class="mega-nav-icon mega-nav-icon-angle-right" aria-hidden="true"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#mega-nav-icon-angle"></use></svg><span class="visuallyhidden">Open</span>
+              </span>
+            </div>
           </button>
           <div id="mega-nav-body-ct" class="mega-nav-body-ct" aria-labelledby="mega-nav-ctrl">
             <div class="mega-nav-body">
