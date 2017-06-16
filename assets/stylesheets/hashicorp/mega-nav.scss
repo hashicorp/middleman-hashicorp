@@ -190,7 +190,6 @@ $mega-nav-sandbox-specificity:          4;
     display: inline-block;
     fill: currentColor;
     height: 1em;
-    margin-left: 0.3em;
     stroke: currentColor;
     width: 1em;
   }
@@ -238,7 +237,6 @@ $mega-nav-sandbox-specificity:          4;
 
     .mega-nav-icon {
       display: block;
-      margin: 0;
     }
   }
 
@@ -276,13 +274,9 @@ $mega-nav-sandbox-specificity:          4;
   }
 
   .mega-nav-close {
-    align-items: center;
     background-color: transparent;
     border: 1px solid currentColor;
-    display: inline-flex;
     float: right;
-    justify-content: center;
-    line-height: 1;
     margin-left: 1em;
     margin-bottom: 1em;
     padding: 0.5em;
@@ -296,6 +290,10 @@ $mega-nav-sandbox-specificity:          4;
 
     &:active {
       outline: none;
+    }
+
+    .mega-nav-icon {
+      display: block;
     }
   }
 
