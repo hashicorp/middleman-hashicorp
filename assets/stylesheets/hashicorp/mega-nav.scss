@@ -109,6 +109,7 @@ $mega-nav-sandbox-specificity:          4;
     .text-muted {
       color: $mega-nav-color-neutral;
     }
+  }
 
     .mega-nav-banner-logo {
       opacity: 1;
@@ -119,8 +120,11 @@ $mega-nav-sandbox-specificity:          4;
         -moz-transition: opacity .25s ease-in-out;
         -webkit-transition: opacity .25s ease-in-out;
       }
+
+      > img {
+        height: 25px;
+      }
     }
-  }
 
     .mega-nav-banner-item {
       &:first-child {
@@ -148,7 +152,6 @@ $mega-nav-sandbox-specificity:          4;
     font-family: $mega-nav-font-family;
     font-size: $mega-nav-font-size-base;
     line-height: $mega-nav-line-height-base / $mega-nav-font-size-base;
-    margin-top: 3px;
 
     h1, h2, h3, h4, h5, h6,
     ul, p {
@@ -191,7 +194,6 @@ $mega-nav-sandbox-specificity:          4;
     display: inline-block;
     fill: currentColor;
     height: 1em;
-    margin-left: 0.3em;
     stroke: currentColor;
     width: 1em;
   }
@@ -207,12 +209,9 @@ $mega-nav-sandbox-specificity:          4;
   }
 
   .mega-nav-ctrl {
-    align-items: center;
     background-color: transparent;
     border: 0;
-    display: inline-flex;
-    justify-content: center;
-    margin-left: 0.3em;
+    margin-left: 0.5em;
     padding: 0;
     text-align: center;
     vertical-align: middle;
@@ -229,14 +228,19 @@ $mega-nav-sandbox-specificity:          4;
     }
   }
 
+    .mega-nav-ctrl-items {
+      align-items: center;
+      display: flex;
+      padding-top: 1px;
+    }
+
   .mega-nav-icon-outline {
     border: 1px solid;
-    margin-top: -3px;
+    margin-top: -1px;
     padding: 0.5em;
 
     .mega-nav-icon {
       display: block;
-      margin: 0;
     }
   }
 
@@ -274,13 +278,9 @@ $mega-nav-sandbox-specificity:          4;
   }
 
   .mega-nav-close {
-    align-items: center;
     background-color: transparent;
     border: 1px solid currentColor;
-    display: inline-flex;
     float: right;
-    justify-content: center;
-    line-height: 1;
     margin-left: 1em;
     margin-bottom: 1em;
     padding: 0.5em;
@@ -294,6 +294,10 @@ $mega-nav-sandbox-specificity:          4;
 
     &:active {
       outline: none;
+    }
+
+    .mega-nav-icon {
+      display: block;
     }
   }
 
@@ -442,7 +446,7 @@ $mega-nav-sandbox-specificity:          4;
     font-weight: 500;
     line-height: 1;
     margin-bottom: mega-nav-em($mega-nav-line-height-base, $mega-nav-btn-font-size);
-    padding: mega-nav-em(($mega-nav-btn-height - $mega-nav-btn-font-size) / 2, $mega-nav-btn-font-size);
+    padding: mega-nav-em(($mega-nav-btn-height - $mega-nav-btn-font-size) / 2, $mega-nav-btn-font-size) mega-nav-em($mega-nav-btn-font-size);
     text-transform: uppercase;
     width: 100%;
 
