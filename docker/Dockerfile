@@ -5,11 +5,13 @@ MAINTAINER Seth Vargo <seth@hashicorp.com>
 RUN apk add --no-cache bash build-base curl jq nodejs python py-setuptools wget git
 
 # Install s3cmd
-ADD https://github.com/s3tools/s3cmd/releases/download/v1.6.1/s3cmd-1.6.1.tar.gz /s3cmd-1.6.1.tar.gz
-RUN tar -xzvf /s3cmd-1.6.1.tar.gz && \
-  cd /s3cmd-1.6.1 && \
+RUN cd /tmp && \
+  wget https://github.com/s3tools/s3cmd/releases/download/v1.6.1/s3cmd-1.6.1.tar.gz && \
+  tar -xzvf s3cmd-1.6.1.tar.gz && \
+  cd s3cmd-1.6.1 && \
   python setup.py install && \
-  rm -rf /s3cmd-1.6.1*
+  cd .. && \
+  rm -rf s3cmd-1.6.1*
 
 # Add the context
 ADD pkg/ /pkg
