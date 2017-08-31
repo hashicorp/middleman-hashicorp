@@ -78,7 +78,7 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
       end
 
       # Enable cache buster
-      activate :asset_hash
+      activate :asset_hash, :ignore => [/^assets\/files\//]
     end
   end
 
