@@ -167,6 +167,31 @@ module Middleman::HashiCorp
       expect(markdown).to render_html(output)
     end
 
+    it "does not unindent recursive markdown code blocks" do
+      markdown = <<-EOH.gsub(/^ {8}/, "")
+        <div class="examples">
+          <div class="examples-body">
+            ```python
+            a
+              b
+                c
+            ```
+          </div>
+        </div>
+      EOH
+      output = <<-EOH.gsub(/^ {8}/, "")
+        <div class="examples">
+        <div class="examples-body">
+        <pre><code class="python">a
+          b
+            c
+        </code></pre>
+        </div></div>
+      EOH
+
+      expect(markdown).to render_html(output)
+    end
+
     it "supports alert boxes" do
       markdown = <<-EOH.gsub(/^ {8}/, "")
         => This is a success note
