@@ -69,7 +69,7 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
 
     if md = raw.match(/\<(.+?)\>(.*)\<(\/.+?)\>/m)
       open_tag, content, close_tag = md.captures
-      "<#{open_tag}>\n#{recursive_render(unindent(content))}<#{close_tag}>"
+      "<#{open_tag}>\n#{recursive_render(content)}<#{close_tag}>"
     else
       raw
     end
