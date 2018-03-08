@@ -4,7 +4,6 @@ docker:
 	@echo "==> Building container v${VERSION}..."
 	@docker build \
 		--file "docker/Dockerfile" \
-		--squash \
 		--tag "hashicorp/middleman-hashicorp" \
 		--tag "hashicorp/middleman-hashicorp:${VERSION}" \
 		--pull \
