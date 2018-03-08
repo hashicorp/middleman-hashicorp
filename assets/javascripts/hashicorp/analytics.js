@@ -32,6 +32,6 @@ function each(list, cb) {
 }
 
 // Expose as commonjs for module bundlers if needed
-if (module && module.exports) {
+if (typeof module !== 'undefined' && module.exports) {
   module.exports = { track }
 }
