@@ -1,6 +1,8 @@
 FROM ruby:2.3-alpine
 MAINTAINER Seth Vargo <seth@hashicorp.com>
 
+ARG GEM_VERSION
+
 # Install packages
 RUN apk add --no-cache bash build-base curl jq nodejs python py-setuptools wget git
 
@@ -13,19 +15,12 @@ RUN cd /tmp && \
   cd .. && \
   rm -rf s3cmd-1.6.1*
 
-# Add the context
-ADD pkg/ /pkg
-
 # Upgrade bundler
 RUN gem update --no-document && \
   gem cleanup
 
 # Install the bundle
-RUN gem install /pkg/middleman-hashicorp-*.gem --no-document \
-  && rm -rf /pkg
-
-# Remove the package
-RUN rm -rf /pkg
+RUN gem install middleman-hashicorp -v ${GEM_VERSION} --no-document
 
 # Mounts
 WORKDIR /website
