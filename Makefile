@@ -4,6 +4,7 @@ docker:
 	@echo "==> Building container v${VERSION}..."
 	@docker build \
 		--file "docker/Dockerfile" \
+		--build-arg GEM_VERSION=${VERSION} \
 		--tag "hashicorp/middleman-hashicorp" \
 		--tag "hashicorp/middleman-hashicorp:${VERSION}" \
 		--pull \
