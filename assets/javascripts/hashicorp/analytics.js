@@ -6,9 +6,11 @@
  * @param  {Boolean} [link=false] - if true, tracks a link click
  */
 function track(selector, cb, link = false) {
-  each(document.querySelectorAll(selector), el => {
+  each(document.querySelectorAll(selector), function(el) {
     var params = cb
-    if (typeof cb === 'function') params = cb(el)
+    if (typeof cb === 'function') {
+      params = cb(el)
+    }
     var event = params.event
     delete params.event
     if (link) {
