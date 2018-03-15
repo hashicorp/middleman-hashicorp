@@ -153,19 +153,19 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     #
     def pretty_os(os)
       case os
-      when /darwin/
+      when "darwin"
         "macOS"
-      when /freebsd/
+      when "freebsd"
         "FreeBSD"
-      when /openbsd/
+      when "openbsd"
         "OpenBSD"
-      when /netbsd/
+      when "netbsd"
         "NetBSD"
-      when /archlinux/
+      when "archlinux"
         "Arch Linux"
       when "linux"
         "Linux"
-      when /windows/
+      when "windows"
         "Windows"
       else
         os.capitalize
