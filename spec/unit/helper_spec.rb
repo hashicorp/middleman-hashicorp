@@ -93,4 +93,32 @@ class Middleman::HashiCorpExtension
       end
     end
   end
+
+  describe "#pretty_os" do
+    before(:each) do
+      app = middleman_app
+      @instance = Middleman::HashiCorpExtension.new(app,
+        releases_enabled: false,
+      )
+      @instance.app = app
+    end
+
+    [
+      ["darwin", "macOS"],
+      ["freebsd", "FreeBSD"],
+      ["openbsd", "OpenBSD"],
+      ["netbsd", "NetBSD"],
+      ["archlinux", "Arch Linux"],
+      ["linux", "Linux"],
+      ["windows", "Windows"],
+    ].each do |given, expected|
+      it "converts #{given} to #{expected}" do
+        expect(@instance.app.pretty_os(given)).to eq(expected)
+      end
+    end
+
+    it "should capitalize unknown OS" do
+      expect(@instance.app.pretty_os("hashicorplinux")).to eq("Hashicorplinux")
+    end
+  end
 end
