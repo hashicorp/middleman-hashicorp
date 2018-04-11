@@ -29,10 +29,10 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     app.configure(:build, &syntax)
 
     # Organize assets like Rails
-    app.set :css_dir,    "assets/stylesheets"
-    app.set :js_dir,     "assets/javascripts"
-    app.set :images_dir, "assets/images"
-    app.set :fonts_dir,  "assets/fonts"
+    app.config[:css_dir] = "assets/stylesheets"
+    app.config[:js_dir] = "assets/javascripts"
+    app.config[:images_dir] = "assets/images"
+    app.config[:fonts_dir] = "assets/fonts"
 
     # Make custom assets available
     assets = Proc.new { sprockets.import_asset "ie-compat.js" }
@@ -41,22 +41,22 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
 
     # Override the default Markdown settings to use our customer renderer
     # and the options we want!
-    app.set :markdown_engine, :redcarpet
-    app.set :markdown, Middleman::HashiCorp::RedcarpetHTML::REDCARPET_OPTIONS.merge(
+    app.config[:markdown_engine] = :redcarpet
+    app.config[:markdown] = Middleman::HashiCorp::RedcarpetHTML::REDCARPET_OPTIONS.merge(
       renderer: Middleman::HashiCorp::RedcarpetHTML
     )
 
     # Do not strip /index.html from directory indexes
-    app.set :strip_index_file, false
+    app.config[:strip_index_file] = false
 
     # Set the latest version
-    app.set :latest_version, options.version
+    app.config[:latest_version] = options.version
 
     # Do the releases dance
-    app.set :product_versions, _self.product_versions
+    app.config[:product_versions] = _self.product_versions
 
-    app.set :github_slug, options.github_slug
-    app.set :website_root, options.website_root
+    app.config[:github_slug] = options.github_slug
+    app.config[:website_root] = options.website_root
 
     # Configure the development-specific environment
     app.configure :development do
@@ -229,6 +229,7 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # @return [false] if github_slug hasn't been set
     #
     def github_url(specificity = :repo)
+      github_slug = app.config[:github_slug]
       return false if github_slug.nil?
       base_url = "https://github.com/#{github_slug}"
       if specificity == :repo
@@ -247,7 +248,7 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     def path_in_repository(resource)
       relative_path = resource.path.match(/.*\//).to_s
       file = resource.source_file.split("/").last
-      website_root + "/source/" + relative_path + file
+      app.config[:website_root] + "/source/" + relative_path + file
     end
 
     #

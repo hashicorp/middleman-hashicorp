@@ -15,11 +15,14 @@ RSpec::Matchers.define :render_html do |html|
   match do |markdown|
     @expected = html.strip
 
-    instance = Middleman::HashiCorp::RedcarpetHTML.new
-    instance.middleman_app = middleman_app
+    instance = Middleman::HashiCorp::RedcarpetHTML.new()
 
     options = Middleman::HashiCorp::RedcarpetHTML::REDCARPET_OPTIONS
     parser = Redcarpet::Markdown.new(instance, options)
+
+    #logger = Logger.new(STDOUT)
+    #logger.debug("Parser: #{parser.methods}")
+
     @actual = parser.render(markdown).strip
 
     @expected == @actual
@@ -30,5 +33,5 @@ end
 #
 # @return [Middleman::Application]
 def middleman_app
-  @app ||= Middleman::Application.server.inst
+  @app ||= Middleman::Application.new()
 end

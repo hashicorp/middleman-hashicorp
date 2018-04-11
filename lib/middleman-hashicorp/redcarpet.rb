@@ -1,7 +1,6 @@
 require "middleman-core"
 require "middleman-core/renderers/redcarpet"
 require "nokogiri"
-require "active_support/core_ext/module/attribute_accessors"
 
 # Our custom Markdown parser - extends middleman's customer parser so we pick up
 # all the magic.
