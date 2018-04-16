@@ -69,10 +69,15 @@ class Middleman::HashiCorp::RedcarpetHTML < ::Middleman::Renderers::MiddlemanRed
 
     if md = raw.match(/\<(.+?)\>(.*)\<(\/.+?)\>/m)
       open_tag, content, close_tag = md.captures
-      "<#{open_tag}>\n#{recursive_render(content)}<#{close_tag}>"
-    else
-      raw
+      rendered_content = recursive_render(content)
+      # If the recursive render did more than simply wrap
+      # the content within a paragraph, assume this is valid
+      # markdown content and return the result
+      if rendered_content != paragraph(content)
+        return "<#{open_tag}>\n#{rendered_content}<#{close_tag}>"
+      end
     end
+    raw
   end
 
   #
