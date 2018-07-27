@@ -30,6 +30,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'builder',        '~> 3.2'
   spec.add_dependency 'redcarpet',      '~> 3.3'
 
+  # [CVE-2018-3760] Path Traversal in Sprockets: https://groups.google.com/forum/#!topic/ruby-security-ann/2S9Pwz2i16k
+  spec.add_dependency 'sprockets',      '~> 2.12.5'
+
   # Turbolinks
   spec.add_dependency 'turbolinks', '~> 5.0'
 
