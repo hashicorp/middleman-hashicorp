@@ -121,4 +121,18 @@ class Middleman::HashiCorpExtension
       expect(@instance.app.pretty_os("hashicorplinux")).to eq("Hashicorplinux")
     end
   end
+
+  describe "#latest_provider_version" do
+    before(:each) do
+      app = middleman_app
+      @instance = Middleman::HashiCorpExtension.new(app,
+        releases_enabled: false,
+      )
+      @instance.app = app
+    end
+
+    it "returns the latest provider version for a given provider" do
+      expect(@instance.app.latest_provider_version("template")).to eq("1.0.0")
+    end
+  end
 end

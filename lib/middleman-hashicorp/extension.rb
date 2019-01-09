@@ -272,6 +272,13 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
       f = File.expand_path("../partials/_enterprise-alert.html.erb", __FILE__)
       render_individual_file(f, variables, { template_body: File.read(f) })
     end
+
+    #
+    # Query the API to get the latest version of a given terraform provider
+    #
+    def latest_provider_version(name)
+      Middleman::HashiCorp::Releases.fetch_latest_version("terraform-provider-#{name}")[:version]
+    end
   end
 
   #
