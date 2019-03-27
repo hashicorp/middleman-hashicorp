@@ -2,6 +2,14 @@
 
 A wrapper around [Middleman][] for HashiCorp's customizations.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Customizations](#customizations)
+- [Publishing a new Release](#publishing-a-new-release)
+- [Contributing](#contributing)
+
 ## Installation
 
 Add this line to the Gemfile:
