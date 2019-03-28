@@ -132,7 +132,7 @@ class Middleman::HashiCorpExtension
     end
 
     it "returns the latest provider version for a given provider" do
-      expect(@instance.app.latest_provider_version("template")).to eq("1.0.0")
+      expect(@instance.app.latest_provider_version("template")).to match(/\d+\.\d+\.\d+/)
     end
   end
 end
