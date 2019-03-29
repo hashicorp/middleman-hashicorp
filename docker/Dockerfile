@@ -16,7 +16,7 @@ RUN cd /tmp && \
   rm -rf s3cmd-1.6.1*
 
 # Upgrade bundler
-RUN gem update --no-document && \
+RUN gem install bundler -v '~> 1.13' --no-document && \
   gem cleanup
 
 # Install the bundle
