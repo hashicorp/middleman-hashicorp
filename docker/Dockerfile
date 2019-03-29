@@ -20,7 +20,7 @@ RUN gem install bundler -v '~> 1.13' --no-document && \
   gem cleanup
 
 # Install the bundle
-RUN GEM_PATH=$GEM_HOME gem install middleman-hashicorp -v ${GEM_VERSION} --no-document
+RUN GEM_PATH="${GEM_HOME}" gem install middleman-hashicorp -v "${GEM_VERSION}" --no-document
 
 # Mounts
 WORKDIR /website
