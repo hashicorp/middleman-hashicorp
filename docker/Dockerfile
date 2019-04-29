@@ -4,7 +4,7 @@ MAINTAINER Seth Vargo <seth@hashicorp.com>
 ARG GEM_VERSION
 
 # Install packages
-RUN apk add --no-cache bash build-base curl jq nodejs python py-setuptools wget git
+RUN apk add --no-cache bash build-base curl jq nodejs python py-setuptools wget git openssh-client
 
 # Install s3cmd
 RUN cd /tmp && \
