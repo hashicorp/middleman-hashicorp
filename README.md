@@ -310,6 +310,6 @@ Just bump the version string and push a new tag to the repository and our CI wil
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
-[middleman]: http://middlemanapp.com/
-[middleman docs]: http://middlemanapp.com/basics/getting-started/
-[middleman-syntax]: http://github.com/middleman/middleman-syntax/
+[middleman]: https://middlemanapp.com/
+[middleman docs]: https://middlemanapp.com/basics/install
+[middleman-syntax]: https://github.com/middleman/middleman-syntax/
