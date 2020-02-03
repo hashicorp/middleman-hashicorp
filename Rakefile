@@ -5,6 +5,7 @@ RSpec::Core::RakeTask.new do |t|
   t.rspec_opts = [].tap do |a|
     a.push('--color')
     a.push('--format progress')
+    a.push('--trace')
   end.join(' ')
 end
 

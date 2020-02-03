@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    middleman-hashicorp (0.3.42)
+    middleman-hashicorp (0.3.43)
       bootstrap-sass (~> 3.3)
       builder (~> 3.2)
       middleman (~> 3.4)
@@ -54,7 +54,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.7)
     execjs (2.7.0)
-    ffi (1.12.1)
+    ffi (1.12.2)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
