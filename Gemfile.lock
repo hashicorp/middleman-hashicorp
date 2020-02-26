@@ -109,7 +109,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     multi_json (1.14.1)
-    nokogiri (1.10.7)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     padrino-helpers (0.12.9)
       i18n (~> 0.6, >= 0.6.7)
