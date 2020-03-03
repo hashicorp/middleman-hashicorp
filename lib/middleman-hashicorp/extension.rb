@@ -49,9 +49,6 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
     # Do not strip /index.html from directory indexes
     app.set :strip_index_file, false
 
-    # Set the latest version
-    app.set :latest_version, options.version
-
     # Do the releases dance
     app.set :product_versions, _self.product_versions
 
@@ -296,6 +293,16 @@ class Middleman::HashiCorpExtension < ::Middleman::Extension
           "i386" => "/0.1.0_hashios_i386.zip",
         }
       }
+    end
+  end
+
+  def latest_version
+    if options.version.to_s != "checkpoint"
+      options.version
+    else
+      uri = URI("checkpoint-api.hashicorp.com/v1/check/#{options.name}")
+      body = Net::HTTP.get(uri)
+      JSON(json)["current_version"]
     end
   end
 end
