@@ -1,0 +1,105 @@
+version: 2.1
+
+executors:
+  ruby:
+    docker:
+      - image: circleci/ruby:2.3.4-node
+
+commands:
+  bundle-dependencies:
+    description: Bundle Dependencies
+    parameters:
+      bundle-version:
+        type: string
+      gem-version:
+        type: string
+    steps:
+      - run: 
+          name: Upgrade gem
+          command: sudo gem update --system '<< parameters.gem-version >>'
+      - run:
+          name: Upgrade bundler
+          command: |
+            gem install bundler -v '~> << parameters.bundle-version >>'
+      - run:
+          name: Bundle install
+          command: |
+            bundle '_<< parameters.bundle-version >>_' install --jobs 7 --retry=3 --path=vendor/bundle 
+
+jobs:
+  build:
+    executor:
+      name: ruby
+    working_directory: ~/data
+    steps:
+      - checkout
+      - restore_cache: 
+          keys: 
+            - gemfile-cache-{{ checksum "Gemfile.lock" }}
+      - bundle-dependencies:
+          bundle-version: '1.17.3'
+          gem-version: '3.1.2'
+      - save_cache: 
+          key: gemfile-cache-{{ checksum "Gemfile.lock" }}
+          paths: 
+            - ~/data/vendor/bundle
+      - run: bundle exec rake
+      - persist_to_workspace:
+          root: .
+          paths:
+            - vendor/bundle
+  gem-push:
+    executor:
+      name: ruby
+    working_directory: ~/data
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/data
+      - bundle-dependencies:
+          bundle-version: '1.17.3'
+          gem-version: '3.1.2'
+      - run:
+          name: Setup RubyGems
+          command: bash .circleci/setup-rubygems.sh
+      - run:
+          name: Publish to RubyGems
+          command: bundle exec rake release
+      - run: 
+          name: Cleanup
+          command: rm -rf /home/circleci/.gem/credentials
+  docker-push:
+    executor:
+      name: ruby
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Upload docker image
+          command: |
+            docker login -u "${DOCKERHUB_USERNAME}" -p "${DOCKERHUB_PASSWORD}"
+            make docker
+            make docker-push
+
+workflows:
+  middleman-hashicorp:
+    jobs:
+      - build
+      - gem-push:
+          context: middleman-hashicorp
+          requires: 
+            - build
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
+      - docker-push:
+          context: middleman-hashicorp
+          requires: 
+            - build
+          filters:
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+            branches:
+              ignore: /.*/
