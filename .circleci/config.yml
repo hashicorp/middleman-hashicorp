@@ -3,7 +3,7 @@ version: 2.1
 executors:
   ruby:
     docker:
-      - image: circleci/ruby:2.3.4-node
+      - image: docker.mirror.hashicorp.services/circleci/ruby:2.3.4-node
 
 commands:
   bundle-dependencies:
