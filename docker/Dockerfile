@@ -1,4 +1,4 @@
-FROM ruby:2.3-alpine
+FROM docker.mirror.hashicorp.services/ruby:2.3-alpine
 MAINTAINER Seth Vargo <seth@hashicorp.com>
 
 ARG GEM_VERSION
