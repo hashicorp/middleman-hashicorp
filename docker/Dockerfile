@@ -15,7 +15,7 @@ RUN cd /tmp && \
   rm -rf s3cmd-2.2.0*
 
 # Upgrade bundler
-RUN gem install bundler -v '~> 1.13' --no-document && \
+RUN gem install bundler -v '~> 1.17' --no-document && \
   gem cleanup
 
 # Install the bundle
