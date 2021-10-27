@@ -3,7 +3,11 @@ version: 2.1
 executors:
   ruby:
     docker:
-      - image: docker.mirror.hashicorp.services/cimg/ruby:2.7.4-node
+        # This should really use the new `cimg/ruby:2.7.4-node` image instead.
+        # However, the HashiCorp mirror is currently not configured to mirror
+        # `cimg` images.
+        # https://circleci.com/docs/2.0/circleci-images/#next-generation-convenience-images
+      - image: docker.mirror.hashicorp.services/circleci/ruby:2.7.4-node
 
 commands:
   bundle-dependencies:
