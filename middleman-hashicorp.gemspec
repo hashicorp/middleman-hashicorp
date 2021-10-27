@@ -6,6 +6,7 @@ require 'middleman-hashicorp/version'
 Gem::Specification.new do |spec|
   spec.name          = 'middleman-hashicorp'
   spec.version       = Middleman::HashiCorp::VERSION
+  spec.authors       = ['HashiCorp, Inc.']
   spec.summary       = 'A series of helpers for consistency among HashiCorp\'s middleman sites'
   spec.description   = spec.summary
   spec.homepage      = 'https://github.com/hashicorp/middleman-hashicorp'
