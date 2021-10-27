@@ -3,7 +3,11 @@ version: 2.1
 executors:
   ruby:
     docker:
-      - image: docker.mirror.hashicorp.services/circleci/ruby:2.3.4-node
+        # This should really use the new `cimg/ruby:2.7.4-node` image instead.
+        # However, the HashiCorp mirror is currently not configured to mirror
+        # `cimg` images.
+        # https://circleci.com/docs/2.0/circleci-images/#next-generation-convenience-images
+      - image: docker.mirror.hashicorp.services/circleci/ruby:2.7.4-node
 
 commands:
   bundle-dependencies:
@@ -14,7 +18,7 @@ commands:
       gem-version:
         type: string
     steps:
-      - run: 
+      - run:
           name: Upgrade gem
           command: sudo gem update --system '<< parameters.gem-version >>'
       - run:
@@ -24,7 +28,7 @@ commands:
       - run:
           name: Bundle install
           command: |
-            bundle '_<< parameters.bundle-version >>_' install --jobs 7 --retry=3 --path=vendor/bundle 
+            bundle '_<< parameters.bundle-version >>_' install --jobs 7 --retry=3 --path=vendor/bundle
 
 jobs:
   build:
@@ -33,15 +37,15 @@ jobs:
     working_directory: ~/data
     steps:
       - checkout
-      - restore_cache: 
-          keys: 
+      - restore_cache:
+          keys:
             - gemfile-cache-{{ checksum "Gemfile.lock" }}
       - bundle-dependencies:
           bundle-version: '1.17.3'
           gem-version: '3.1.2'
-      - save_cache: 
+      - save_cache:
           key: gemfile-cache-{{ checksum "Gemfile.lock" }}
-          paths: 
+          paths:
             - ~/data/vendor/bundle
       - run: bundle exec rake
       - persist_to_workspace:
@@ -65,7 +69,7 @@ jobs:
       - run:
           name: Publish to RubyGems
           command: bundle exec rake release
-      - run: 
+      - run:
           name: Cleanup
           command: rm -rf /home/circleci/.gem/credentials
   docker-push:
@@ -87,7 +91,7 @@ workflows:
       - build
       - gem-push:
           context: middleman-hashicorp
-          requires: 
+          requires:
             - build
           filters:
             tags:
@@ -96,7 +100,7 @@ workflows:
               ignore: /.*/
       - docker-push:
           context: middleman-hashicorp
-          requires: 
+          requires:
             - build
           filters:
             tags:
