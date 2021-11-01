@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    middleman-hashicorp (0.3.46)
+    middleman-hashicorp (0.3.47)
       bootstrap-sass (~> 3.3)
       builder (~> 3.2)
       middleman (~> 3.4)
