@@ -78,7 +78,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.10
+          version: 20.10.6
       - run:
           name: Upload docker image
           command: |
