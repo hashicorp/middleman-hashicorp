@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MIT
+
 FROM docker.mirror.hashicorp.services/ruby:2.7.4-alpine
 
 ARG GEM_VERSION

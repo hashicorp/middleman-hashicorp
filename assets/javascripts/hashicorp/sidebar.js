@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) HashiCorp, Inc.
+ * SPDX-License-Identifier: MIT
+ */
+
 // HashiSidebar is the sidebar implementation for mobile websites. It
 // appears at a configurable breakpoint in the CSS.
 var HashiSidebar = function() {

@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MIT
+
 require "middleman-core"
 
 ::Middleman::Extensions.register(:hashicorp) do

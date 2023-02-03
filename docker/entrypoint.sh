@@ -1,4 +1,7 @@
 #!/bin/sh
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MIT
+
 set -e
 
 # Install any additional dependencies our bundle needs. Most of the core
