@@ -1,3 +1,6 @@
+> **Note**
+> This repository is no longer maintained or in-use at HashiCorp. As of March 2023, the repository is archived.
+
 # HashiCorp Middleman Customizations
 
 A wrapper around [Middleman][] for HashiCorp's customizations.
